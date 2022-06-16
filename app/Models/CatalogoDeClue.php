@@ -10,7 +10,6 @@ class CatalogoDeClue extends Model
     use HasFactory;
     protected $fillable = [
         'id',
-        'id_empleado',
         'clues',
         'nombre_entidad',
         'clave_entidad',
