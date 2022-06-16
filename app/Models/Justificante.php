@@ -14,4 +14,12 @@ class Justificante extends Model
         'fecha_final',
         'num_memorandum'
     ];
+
+    public function empleados() {
+        return $this->belongsToMany(Empleado::class,
+            'empleado_justificante',
+            'empleado_id',
+            'justificante_id',
+        );
+    }
 }

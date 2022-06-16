@@ -12,4 +12,8 @@ class Falta extends Model
         'fecha',
         'empleado_id'
     ];
+
+    public function empleado() {
+        return $this->belongsTo(Empleado::class);
+    }
 }

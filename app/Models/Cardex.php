@@ -11,4 +11,8 @@ class Cardex extends Model
     protected $fillable = [
         'empleado_id'
     ];
+
+    public function empleado() {
+        return $this->belongsTo(Empleado::class);
+    }
 }

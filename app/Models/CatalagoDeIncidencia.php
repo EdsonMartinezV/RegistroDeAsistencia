@@ -17,4 +17,8 @@ class CatalagoDeIncidencia extends Model
         'penalizacion',
         'porcentaje_penalizacion'
     ];
+
+    public function empleado() {
+        return $this->belongsTo(Empleado::class);
+    }
 }

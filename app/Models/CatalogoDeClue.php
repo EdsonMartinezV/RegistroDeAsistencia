@@ -91,4 +91,8 @@ class CatalogoDeClue extends Model
         'tipo_certificacion',
         'vigencia_certificacion',
     ];
+
+    public function empleados() {
+        return $this->hasMany(Empleado::class);
+    }
 }

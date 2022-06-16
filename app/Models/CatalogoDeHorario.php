@@ -13,4 +13,12 @@ class CatalogoDeHorario extends Model
         'hora_salida',
         'dias'
     ];
+
+    public function empleados() {
+        return $this->belongsToMany(Empleado::class,
+            'empleado_catalogo_de_horario',
+            'empleado_id',
+            'catalogo_de_horario_id',
+        );
+    }
 }

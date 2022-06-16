@@ -13,12 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vacacions', function (Blueprint $table) {
+        Schema::create('empleado_catalogo_de_horario', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha_inicio');
-            $table->date('fecha_fin');
+            $table->date('inicio_periodo_laboral');
+            $table->date('fin_periodo_laboral');
             $table->foreignId('empleado_id')
                 ->constrained('empleados');
+            $table->foreignId('catalogo_de_horario_id')
+                ->constrained('catalogo_de_horarios');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vacacions');
+        Schema::dropIfExists('empleado_catalogo_de_horarios');
     }
 };
