@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('catalogo_de_horarios', function (Blueprint $table) {
+        Schema::create('dias', function (Blueprint $table) {
             $table->id();
-            $table->time('hora_entrada');
-            $table->time('hora_salida');
+            $table->string('dias');
+            $table->foreignId('horario_id')
+                ->constrained('catalogo_de_horarios');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('catalogo_de_horarios');
+        Schema::dropIfExists('dias');
     }
 };

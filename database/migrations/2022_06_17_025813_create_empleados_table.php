@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('rfc');
             $table->string('curp');
             $table->string('tipo_trabajador');
-            $table->foreignId('clues_id')
+            $table->foreignId('catalogo_de_clues_id')
                 ->constrained('catalogo_de_clues');
             $table->timestamps();
         });
