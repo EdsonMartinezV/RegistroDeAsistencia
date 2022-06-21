@@ -15,8 +15,10 @@ return new class extends Migration
     {
         Schema::create('dias', function (Blueprint $table) {
             $table->id();
-            $table->string('dias');
-            $table->foreignId('horario_id')
+            $table->string('dia');
+            $table->foreignId('periodo_id')
+                ->constrained('periodos');
+            $table->foreignId('catalogo_de_horarios_id')
                 ->constrained('catalogo_de_horarios');
             $table->timestamps();
         });

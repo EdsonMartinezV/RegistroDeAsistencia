@@ -9,7 +9,8 @@ class Dia extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'dias',
-        'horario_id'
+        'periodo_id',
+        'catalogo_de_horarios_id',
+        'dia'
     ];
 }
