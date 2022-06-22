@@ -16,8 +16,7 @@ class Incidencia extends Model
         'fin_periodo',
         'resultante',
         'penalizacion',
-        'porcentaje_penalizacion',
-        'num_memorandum'
+        'porcentaje_penalizacion'
     ];
 
     public function suptipoDeIncidencias()

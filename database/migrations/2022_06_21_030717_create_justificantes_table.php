@@ -13,15 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('catalogo_de_incidencias', function (Blueprint $table) {
+        Schema::create('justificantes', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha');
             $table->string('tipo');
-            $table->date('inicio_periodo');
-            $table->date('fin_periodo');
-            $table->string('resultante');
-            $table->boolean('penalizacion');
-            $table->double('porcentaje_penalizacion', 8, 2);
+            $table->dateTime('fecha_inicio');
+            $table->dateTime('fecha_final');
+            $table->string('horario');
+            $table->integer('num_memorandum');
+            $table->foreignId('empleado_id')
+                ->constrained('empleados');
+            $table->foreignId('catalogo_de_incidencias_id')
+                ->constrained('catalogo_de_incidencias');
             $table->timestamps();
         });
     }
@@ -33,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('catalogo_de_incidencias');
+        Schema::dropIfExists('justificantes');
     }
 };
