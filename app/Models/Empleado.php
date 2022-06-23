@@ -13,6 +13,6 @@ class Empleado extends Model
         'rfc',
         'curp',
         'tipo_trabajador',
-        'clues_id'
+        'catalogo_de_clues_id'
     ];
 }
