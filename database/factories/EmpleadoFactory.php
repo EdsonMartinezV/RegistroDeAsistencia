@@ -17,7 +17,11 @@ class EmpleadoFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'nombre' => $this->faker->name,
+            'rfc' => $this->faker->unique()->rfc,
+            'curp' => $this->faker->unique()->curp,
+            'tipo_trabajador' => $this->faker->randomElement(['medico', 'administrativo']),
+            'clues_id' => $this->faker->numberBetween(1, 10),
         ];
     }
 }
