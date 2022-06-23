@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('subtipo_de_incidencias', function (Blueprint $table) {
+        Schema::create('catalogo_de_horarios', function (Blueprint $table) {
             $table->id();
-            $table->string('descripcion');
-            $table->foreignId('catalogo_de_incidencias_id')
-                ->constrained('catalogo_de_incidencias');
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subtipo_de_incidencias');
+        Schema::dropIfExists('catalogo_de_horarios');
     }
 };
