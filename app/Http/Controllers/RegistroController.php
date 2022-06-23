@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class RegistroController extends Controller
 {
-    public function registrarAsistencia(Request $request){
+    public function validarAsistencia(Request $request){
         $request->validate([
             'empleado_id' => 'required',
             'hora' => 'required',
