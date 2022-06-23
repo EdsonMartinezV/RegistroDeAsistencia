@@ -17,9 +17,9 @@ class DiaFactory extends Factory
     public function definition()
     {
         return [
-            'dia' => $this->faker->date('d'),
+            /*'dia' => $this->faker->date('d'),
             'id_periodo' => Periodo::all()->random()->id,
-            'id_catalogo_de_horario' => Periodo::all()->random()->id
+            'id_catalogo_de_horario' => Periodo::all()->random()->id*/
         ];
     }
 }
