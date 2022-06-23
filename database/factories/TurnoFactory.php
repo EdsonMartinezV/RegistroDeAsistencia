@@ -17,7 +17,9 @@ class TurnoFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'entrada' => $this->faker->time(),
+            'salida' => $this->faker->time(),
+            'dia_id' => $this->faker->numberBetween(1, 10)
         ];
     }
 }
