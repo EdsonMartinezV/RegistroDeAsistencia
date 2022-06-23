@@ -24,7 +24,7 @@ class JustificanteFactory extends Factory
             'tipo' => $this->faker->name,
             'fecha_inicio' => $this->faker->dateTime($max = 'now'),
             'fecha_final' => $this->faker->dateTime($max = 'now'),
-            'horario' => $faker->unique()->randomElement([
+            'horario' => $faker->randomElement([
                 'Matutino',
                 'Vespertino',
             ]),
