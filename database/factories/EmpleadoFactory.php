@@ -17,6 +17,7 @@ class EmpleadoFactory extends Factory
      */
     public function definition()
     {
+        
         return [
             'nombre' => $this->faker->name,
             'rfc' => Str::random(13),
