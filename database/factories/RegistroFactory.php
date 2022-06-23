@@ -17,7 +17,8 @@ class RegistroFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'empleado_id' => $this->faker->numberBetween(1, 10),
+            'hora' => $this->faker->dateTime($max = 'now'),
         ];
     }
 }
