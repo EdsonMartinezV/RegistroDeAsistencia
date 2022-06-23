@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RegistroController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('asistencia');
 });
+
+//Registrar
+Route::post('/register-user',[RegistroController::class, 'registrarAsistencia'])->name('usuario.asistencia');
