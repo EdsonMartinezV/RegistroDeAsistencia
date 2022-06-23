@@ -9,6 +9,7 @@ class Clues extends Model
 {
     use HasFactory;
     protected $table = 'catalogo_de_clues';
+    protected $factory = 'database\factories\CatalogoDeClueFactory';
     protected $fillable = [
         'clues',
         'nombre_entidad'
