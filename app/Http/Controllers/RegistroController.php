@@ -12,6 +12,11 @@ class RegistroController extends Controller
             'empleado_id' => 'required',
             'hora' => 'required',
         ]);
+
+        $registro = new Registro;
+        $registro->hora=$request['id'];
+
+        $registro->save();
        
         return redirect()->route('client.add.image');
     }
