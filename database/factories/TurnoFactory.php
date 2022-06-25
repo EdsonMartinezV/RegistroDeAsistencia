@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Dia;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Turno>
@@ -17,9 +18,9 @@ class TurnoFactory extends Factory
     public function definition()
     {
         return [
-            'entrada' => $this->faker->time(),
-            'salida' => $this->faker->time(),
-            'dia_id' => $this->faker->numberBetween(1, 10)
+            'entrada' => $this->faker->Time($max = 'now'),
+            'salida' => $this->faker->Time($max = 'now'),
+            'id_dia' => Dia::all()->random()->id
         ];
     }
 }

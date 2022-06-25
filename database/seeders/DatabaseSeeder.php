@@ -4,8 +4,9 @@ namespace Database\Seeders;
 
 use App\Models\Clues;
 use App\Models\Empleado;
-use App\Models\Registro;
 use App\Models\Dia;
+use App\Models\Horario;
+use App\Models\Justificante;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -20,8 +21,9 @@ class DatabaseSeeder extends Seeder
     {
         Clues::factory(10)->create();
         Empleado::factory(10)->create();
-        Catalogo_de_horario::factory(10)->create();
+        Horario::factory(10)->create();
         Dia::factory(10)->create();
+        Justificante::factory(10)->create();
         
         // \App\Models\User::factory(10)->create();
 
