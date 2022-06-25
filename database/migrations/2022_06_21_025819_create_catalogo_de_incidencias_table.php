@@ -15,13 +15,11 @@ return new class extends Migration
     {
         Schema::create('catalogo_de_incidencias', function (Blueprint $table) {
             $table->id();
-            $table->date('fecha');
             $table->string('tipo');
-            $table->date('inicio_periodo');
-            $table->date('fin_periodo');
             $table->string('resultante');
             $table->boolean('penalizacion');
-            $table->double('porcentaje_penalizacion', 8, 2);
+            $table->double('porcentaje_penalizacion', 8, 2)
+                ->nullable();
             $table->timestamps();
         });
     }
