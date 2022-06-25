@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('dias', function (Blueprint $table) {
             $table->id();
-            $table->string('dia');
+            $table->smallInteger('dia_entrada');
+            $table->smallInteger('dia_salida');
             $table->foreignId('periodo_id')
                 ->constrained('periodos');
             $table->foreignId('catalogo_de_horarios_id')

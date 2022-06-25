@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('clues');
             $table->string('nombre_entidad');
-            $table->timestamps();
+          
         });
     }
 

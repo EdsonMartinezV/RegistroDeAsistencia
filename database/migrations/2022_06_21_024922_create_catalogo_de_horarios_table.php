@@ -15,6 +15,13 @@ return new class extends Migration
     {
         Schema::create('catalogo_de_horarios', function (Blueprint $table) {
             $table->id();
+            $table->time('hora_entrada');
+            $table->time('hora_salida');
+            $table->string('descripcion',80);
+            $table->time('hora_inicio_checada_entrada');
+            $table->time('hora_fin_checada_entrada');
+            $table->time('hora_inicio_checada_salida');
+            $table->time('hora_fin_checada_salida');
             $table->timestamps();
         });
     }
