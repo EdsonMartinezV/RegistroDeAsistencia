@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('tipo_trabajador');
             $table->foreignId('catalogo_de_clues_id')
                 ->constrained('catalogo_de_clues');
-            $table->timestamps();
+          
         });
     }
 

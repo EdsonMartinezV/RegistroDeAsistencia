@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Incidencia extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $table = 'catalogo_de_incidencias';
     protected $fillable = [
         'fecha',

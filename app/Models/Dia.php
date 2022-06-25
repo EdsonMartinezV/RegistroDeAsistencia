@@ -11,6 +11,7 @@ class Dia extends Model
     protected $fillable = [
         'periodo_id',
         'catalogo_de_horarios_id',
-        'dia'
+        'dia_entrada',
+        'dia_salida'
     ];
 }
