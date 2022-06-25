@@ -16,7 +16,6 @@ class CluesFactory extends Factory
      */
     public function definition()
     {
-        
         return [
             'clues' => $this->faker->randomNumber(6),
             'nombre_entidad' => $this->faker->name,

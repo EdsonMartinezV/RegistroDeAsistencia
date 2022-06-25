@@ -15,4 +15,8 @@ class Clues extends Model
         'clues',
         'nombre_entidad'
     ];
+
+    public function empleados(){
+        return $this->hasMany(Empleado::class);
+    }
 }

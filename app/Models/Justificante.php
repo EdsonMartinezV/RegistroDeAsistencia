@@ -19,13 +19,11 @@ class Justificante extends Model
         'catalogo_de_incidencias_id'
     ];
 
-    public function catalogoDeIncidencias()
-    {
-        return $this->belongsTo(CatalogoDeIncidencias::class);
+    public function incidencias(){
+        return $this->belongsTo(Incidencia::class);
     }
 
-    public function empleado()
-    {
+    public function empleado(){
         return $this->belongsTo(Empleado::class);
     }
 }

@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('turnos', function (Blueprint $table) {
+        Schema::create('subtipos_de_incidencia', function (Blueprint $table) {
             $table->id();
-            $table->time('entrada');
-            $table->time('salida');
-            /* $table->boolean('mismo_dia'); */
-            $table->foreignId('dia_id')
-                ->constrained('dias');
+            $table->string('descripcion');
+            $table->foreignId('catalogo_de_incidencias_id')
+                ->constrained('catalogo_de_incidencias');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('turnos');
+        Schema::dropIfExists('subtipos_de_incidencia');
     }
 };

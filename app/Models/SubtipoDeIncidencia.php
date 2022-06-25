@@ -9,13 +9,13 @@ class SubtipoDeIncidencia extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    protected $table = 'subtipos_de_incidencia';
     protected $fillable = [
         'descripcion',
         'catalogo_de_incidencias_id'
     ];
 
-    public function catalogoDeIncidencias()
-    {
-        return $this->belongsTo(CatalogoDeIncidencia::class);
+    public function incidencias(){
+        return $this->belongsTo(Incidencia::class);
     }
 }

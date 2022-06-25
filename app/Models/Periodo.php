@@ -14,4 +14,12 @@ class Periodo extends Model
         'fin_periodo_laboral',
         'empleado_id'
     ];
+
+    public function empleado(){
+        return $this->belongsTo(Empleado::class);
+    }
+
+    public function dias(){
+        return $this->belongsToMany(Dia::class);
+    }
 }

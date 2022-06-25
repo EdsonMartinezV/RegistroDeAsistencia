@@ -16,4 +16,20 @@ class Empleado extends Model
         'tipo_trabajador',
         'catalogo_de_clues_id'
     ];
+
+    public function registros(){
+        return $this->hasMany(Registro::class);
+    }
+
+    public function clues(){
+        return $this->belongsTo(Clues::class);
+    }
+
+    public function justificantes(){
+        return $this->hasMany(Justificante::class);
+    }
+
+    public function periodos(){
+        return $this->hasMany(Periodo::class);
+    }
 }

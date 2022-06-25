@@ -13,4 +13,8 @@ class Registro extends Model
         'hora',
         'empleado_id',
     ];
+
+    public function empleado(){
+        return $this->belongsTo(Empleado::class);
+    }
 }

@@ -11,22 +11,17 @@ class Incidencia extends Model
     public $timestamps = false;
     protected $table = 'catalogo_de_incidencias';
     protected $fillable = [
-        'fecha',
         'tipo',
-        'inicio_periodo',
-        'fin_periodo',
         'resultante',
         'penalizacion',
         'porcentaje_penalizacion'
     ];
 
-    public function suptipoDeIncidencias()
-    {
+    public function suptipoDeIncidencias(){
         return $this->hasMany(SuptipoDeIncidencia::class);
     }
 
-    public function justificantes()
-    {
+    public function justificantes(){
         return $this->hasMany(Justificante::class);
     }
 }

@@ -19,4 +19,8 @@ class Horario extends Model
         'hora_inicio_checada_salida',
         'hora_fin_checada_salida'
     ];
+
+    public function dias(){
+        return $this->belongsToMany(Dia::class);
+    }
 }
