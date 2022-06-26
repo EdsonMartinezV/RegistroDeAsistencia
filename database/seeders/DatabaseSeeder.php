@@ -20,19 +20,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        /* Clues::factory(10)->create();
+        Clues::factory(10)->create();
         Empleado::factory(10)->create();
         Horario::factory(10)->create();
         Periodo::factory(10)->create();
         Dia::factory(10)->create();
-        Justificante::factory(10)->create(); */
+        //Justificante::factory(10)->create(); 
         
         $this->call(DiaFestivoSeeder::class);
-        // \App\Models\User::factory(10)->create();
+         /*App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+         App\Models\User::factory()->create([
+             'name' => 'Test User',
+             'email' => 'test@example.com',
+         ]);*/
     }
 }

@@ -12,7 +12,8 @@ class Periodo extends Model
     protected $fillable = [
         'inicio_periodo_laboral',
         'fin_periodo_laboral',
-        'empleado_id'
+        'empleado_id',
+       
     ];
 
     public function empleado(){

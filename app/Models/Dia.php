@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Dia extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $fillable = [
         'dia_entrada',
         'dia_salida',
