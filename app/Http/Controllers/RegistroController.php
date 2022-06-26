@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Registro;
+use App\Models\Empleado;
 use Illuminate\Http\Request;
 
 class RegistroController extends Controller
@@ -13,11 +14,22 @@ class RegistroController extends Controller
             'hora' => 'required',
         ]);
 
-        $registro = new Registro;
-        $registro->hora=$request['id'];
+        $datos=$request->all();
+        return $this->comprobarEmpleado($datos);
+    }
 
-        $registro->save();
+    public function comprobarEmpleado($valores){
+
+        $empleado = Empleado::find($valores['empleado_id']);
+        if(!empty($empleado)){
+            return $this->crearRegistro($valores, $empleado);
+        }
        
-        return redirect()->route('client.add.image');
+    }
+
+    public function crearRegistro($valores, $empleado){
+
+        dd($valores);
+       
     }
 }

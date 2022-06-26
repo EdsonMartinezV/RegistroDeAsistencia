@@ -31,6 +31,9 @@
                     <div class="form-outline">
                       <label class="form-label" for="hora">Hora de registro</label><br>
                       <input type="time" id="hora" name="hora"/>
+                      @error('hora')
+                          <br><small>{{ $message }}</small>
+                      @enderror
                     </div>
                   </div>
                 </div>
