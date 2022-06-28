@@ -25,33 +25,114 @@ class IncidenciaSeeder extends Seeder
         Incidencia::create([
             'tipo' => 'P/S',
             'resultante' => 'Licencia s/g de sueldo',
-            'penalizacion' => false 
+            'penalizacion' => true,
+            'porcentaje_penalizacion' => 0.5 
+        ]);
+        
+        Incidencia::create([
+            'tipo' => 'P/G',
+            'resultante' => 'Licencia c/g de sueldo',
+            'penalizacion' => false
         ]);
 
         Incidencia::create([
-            'tipo' => 'Dia',
-            'resultante' => 'Atraso',
+            'tipo' => 'R/1',
+            'resultante' => 'Retardo Menor',
             'penalizacion' => false,
         ]);
 
         Incidencia::create([
-            'tipo' => '6Hrs',
-            'resultante' => 'Atraso',
+            'tipo' => 'R/2',
+            'resultante' => 'Retardo Mayor',
+            'penalizacion' => true,
+            'porcentaje_penalizacion' => 0.5
+        ]);
+
+        Incidencia::create([
+            'tipo' => 'O',
+            'resultante' => 'Onomastico',
+            'penalizacion' => false
+        ]);
+
+        Incidencia::create([
+            'tipo' => 'V',
+            'resultante' => 'Vacaciones',
+            'penalizacion' => false
+        ]);
+
+        Incidencia::create([
+            'tipo' => 'E',
+            'resultante' => 'Licencia Medica',
+            'penalizacion' => false
+        ]);
+
+        Incidencia::create([
+            'tipo' => 'L/S',
+            'resultante' => 'Licencia Sindical',
             'penalizacion' => false,
         ]);
 
         Incidencia::create([
-            'tipo' => 'Comision',
-            'resultante' => 'Atraso',
-            'penalizacion' => false,
-            'porcentaje_penalizacion' => 'Atraso'
+            'tipo' => 'C',
+            'resultante' => 'Comision',
+            'penalizacion' => false
         ]);
 
         Incidencia::create([
-            'tipo' => 'Vacaciones',
-            'resultante' => 'Atraso',
-            'penalizacion' => false,
-            'porcentaje_penalizacion' => 'Atraso'
+            'tipo' => 'P/E',
+            'resultante' => 'Permiso Economico',
+            'penalizacion' => true,
+            'porcentaje_penalizacion' => 0.5
+        ]);
+
+        Incidencia::create([
+            'tipo' => 'O',
+            'resultante' => 'Omision',
+            'penalizacion' => false
+        ]);
+
+        Incidencia::create([
+            'tipo' => 'S',
+            'resultante' => 'Suspension',
+            'penalizacion' => true,
+            'porcentaje_penalizacion' => 0.5
+        ]);
+
+        Incidencia::create([
+            'tipo' => 'P/H',
+            'resultante' => 'Permiso por Hora',
+            'penalizacion' => false
+        ]);
+
+        Incidencia::create([
+            'tipo' => 'P/A',
+            'resultante' => 'Pago de Guardia',
+            'penalizacion' => true,
+            'porcentaje_penalizacion' => 0.5
+        ]);
+
+        Incidencia::create([
+            'tipo' => 'M',
+            'resultante' => 'Memorandum',
+            'penalizacion' => false
+        ]);
+
+        Incidencia::create([
+            'tipo' => 'R',
+            'resultante' => 'Riesgo',
+            'penalizacion' => false
+        ]);
+
+        Incidencia::create([
+            'tipo' => 'COV',
+            'resultante' => 'Covid',
+            'penalizacion' => false
+        ]);
+
+        Incidencia::create([
+            'tipo' => 'R/D',
+            'resultante' => 'Reposicion',
+            'penalizacion' => false
         ]);
     }
 }
