@@ -16,6 +16,8 @@
     <title>Reporte de faltas</title>
 </head>
 <body>
+    <form action="{{ route('validarAsistencia') }}" method="GET">
+        @csrf
     <h1>Reporte de faltas</h1>
     <div class="container py-5 h-100">
         <div class="row justify-content-center align-items-center h-100">
@@ -43,6 +45,11 @@
                            </div>
                         </div>
                      </div>
+                     <div class='col-sm-6'>
+                        <div class="form-group">
+                            <input class="btn btn-primary btn-lg" type="submit" value="Obtener" />
+                        </div>
+                     </div>
                      <script type="text/javascript">
                         $(function () {
                             $('#datetimepicker1').datetimepicker();
@@ -50,6 +57,7 @@
                         });
                      </script>
                 </div>
+            </form> 
                 <br>
                 <table class="table table-striped">
                     
@@ -64,16 +72,18 @@
                     </thead>
                     <tbody>
                         <tr> 
-                            <td> Lunes </td>
-                            <td> 12-2-22 </td>
-                            <td> 12:12 </td>
-                            <td> 17:23 </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
+                            <td> </td>
                             
                         </tr>     
                     </tbody>
                 </table>
             </div>
         </div>
-    </div>                
+        
+    </div> 
+                 
 </body>
 </html>
