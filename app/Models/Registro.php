@@ -9,6 +9,7 @@ class Registro extends Model
 {
     use HasFactory;
     public $timestamps = false;
+    
     protected $fillable = [
         'hora',
         'empleado_id',

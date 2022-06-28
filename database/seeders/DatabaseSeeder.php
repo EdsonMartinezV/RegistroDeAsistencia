@@ -8,6 +8,7 @@ use App\Models\Dia;
 use App\Models\Horario;
 use App\Models\Justificante;
 use App\Models\Periodo;
+use App\Models\Registro;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -25,6 +26,7 @@ class DatabaseSeeder extends Seeder
         Horario::factory(10)->create();
         Periodo::factory(10)->create();
         Dia::factory(10)->create();
+        Registro::factory(10)->create();
         //Justificante::factory(10)->create(); 
         
         $this->call(DiaFestivoSeeder::class);
