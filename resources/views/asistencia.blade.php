@@ -27,12 +27,6 @@
                       @enderror
                     </div>
                   </div>
-                  <div class="col-md-6 mb-4">
-                    <div class="form-outline">
-                      <label class="form-label" for="hora">Hora de registro</label><br>
-                      <input type="time" id="hora" name="hora"/>
-                    </div>
-                  </div>
                 </div>
                 <div class="mt-4 pt-2">
                   <input class="btn btn-primary btn-lg" type="submit" value="Registrar" />

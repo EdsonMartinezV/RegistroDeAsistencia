@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class DiaFestivo extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $table = 'dias_festivos';
     protected $fillable = [
         'fecha',
