@@ -18,4 +18,17 @@ Route::get('/', function () {
     return view('asistencia');
 })->name('formularioAsistencia');
 
+Route::get('cardex', function() {
+    return view('cardex');
+});
+
+Route::get('reporteFaltas', function() {
+    return view('reporteFaltas');
+});
+Route::get('menu', function() {
+    return view('navbar');
+});
+
 Route::post('/validar-asistencia', [RegistroController::class, 'validarAsistencia'])->name('validarAsistencia');
+
+Route::get('/obtener-faltas', [RegistroController::class, 'validarAsistencia'])->name('validarAsistencia');
