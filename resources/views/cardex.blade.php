@@ -12,9 +12,8 @@
     <h1>Cardex</h1>
     <div class="container py-2 h-100">
         <div class="row justify-content-center align-items-center h-100">
-            
-                <table class="table table-striped">
-                    <thead>
+            <table class="table table-striped">
+                <thead>
                     <tr>
                         <th scope="col">Año</th>
                         <th scope="col">Mes</th>
@@ -50,47 +49,46 @@
                         <th scope="col">30</th>
                         <th scope="col">31</th>
                     </tr>
-                    </thead>
-                    <tbody class="table table-striped">
-                        <tr> 
-                            <td> 2022 </td>
-                            <td> Junio </td>
-                            <td> V </td>
-                            <td> V </td>
-                            <td> V </td>
-                            <td> V </td>
-                            <td> V </td>
-                            <td> V </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                            <td>  </td>
-                        </tr>     
-                    </tbody>
-                </table>
-           
+                </thead>
+                <tbody class="table table-striped">
+                    <tr> 
+                        <td> 2022 </td>
+                        <td> Junio </td>
+                        <td> V </td>
+                        <td> V </td>
+                        <td> V </td>
+                        <td> V </td>
+                        <td> V </td>
+                        <td> V </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                        <td>  </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    </div>      
+    </div>
 </body>
 </html>

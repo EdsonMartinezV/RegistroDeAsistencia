@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\RegistroController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,3 +20,7 @@ Route::get('/', function () {
 })->name('formularioAsistencia');
 
 Route::post('/validar-asistencia', [RegistroController::class, 'validarAsistencia'])->name('validarAsistencia');
+
+Route::get('/empleados', [EmpleadoController::class, 'mostrarEmpleados'])->name('empleados');
+
+Route::get('/empleados/{empleadoId}', [EmpleadoController::class, 'mostrarEmpleado'])->name('empleado');
