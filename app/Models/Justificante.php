@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Justificante extends Model
 {
     use HasFactory;
-    public $timestamps = false;
     protected $fillable = [
         'tipo',
         'fecha_inicio',

@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class SubtipoDeIncidencia extends Model
 {
     use HasFactory;
-    public $timestamps = false;
     protected $table = 'subtipos_de_incidencia';
     protected $fillable = [
         'descripcion',

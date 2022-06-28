@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         Justificante::factory(10)->create(); */
         
         $this->call(DiaFestivoSeeder::class);
+        $this->call(IncidenciaSeeder::class);
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
