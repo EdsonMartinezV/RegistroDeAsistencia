@@ -21,9 +21,9 @@ return new class extends Migration
             $table->string('horario');
             $table->integer('num_memorandum');
             $table->foreignId('empleado_id')
-                ->constrained('empleados');
+                ->constrained('empleados')->onUpdate('cascade') ->onDelete('cascade');
             $table->foreignId('catalogo_de_incidencias_id')
-                ->constrained('catalogo_de_incidencias');
+                ->constrained('catalogo_de_incidencias')->onUpdate('cascade') ->onDelete('cascade');
             $table->timestamps();
         });
     }

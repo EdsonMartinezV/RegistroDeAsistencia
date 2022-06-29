@@ -18,9 +18,9 @@ return new class extends Migration
             $table->smallInteger('dia_entrada');
             $table->smallInteger('dia_salida');
             $table->foreignId('periodo_id')
-                ->constrained('periodos');
+                ->constrained('periodos')->onUpdate('cascade') ->onDelete('cascade');
             $table->foreignId('catalogo_de_horarios_id')
-                ->constrained('catalogo_de_horarios');
+                ->constrained('catalogo_de_horarios')->onUpdate('cascade') ->onDelete('cascade');
             $table->timestamps();
         });
     }

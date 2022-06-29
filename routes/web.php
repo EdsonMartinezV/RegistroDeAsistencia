@@ -20,21 +20,26 @@ Route::get('/', function () {
     return view('asistencia');
 })->name('formularioAsistencia');
 
-Route::get('cardex', function() {
+Route::get('cardex/{id}', function() {
     return view('cardex');
-});
+})->name('cardex');
+
+Route::get('reporteFaltas/{id}', function($id) {
+    return view('reporteFaltas',compact('id'));
+})->name('faltas');
 
 Route::get('reporteFaltas', function() {
     return view('reporteFaltas');
-});
+})->name('faltasDatos');
+
 Route::get('menu', function() {
     return view('navbar');
 });
 
 Route::post('/validar-asistencia', [RegistroController::class, 'validarAsistencia'])->name('validarAsistencia');
 
-Route::get('/obtener-faltas', [FaltasController::class, 'obtenerFaltas'])->name('obtenerFaltas');
+Route::get('/obtener-faltas/{id}', [FaltasController::class, 'verificarPeriodo'])->name('obtenerFaltas');
 Route::get('/empleados', [EmpleadoController::class, 'mostrarEmpleados'])->name('empleados');
 
 Route::get('/empleados/{empleadoId}', [EmpleadoController::class, 'mostrarEmpleado'])->name('empleado');
-Route::get('/obtener-faltas', [RegistroController::class, 'validarAsistencia'])->name('validarAsistencia');
+

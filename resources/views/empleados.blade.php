@@ -21,6 +21,7 @@
                 <td>{{ $empleado->nombre }}</td>
                 <td><a href="{{ route('cardex', $empleado->id) }}">Cardex</a></td>
                 <td><a href="{{ route('faltas', $empleado->id) }}">Reporte de Faltas</a></td>
+                <br>
             </tr>
         @endforeach
     </tbody>

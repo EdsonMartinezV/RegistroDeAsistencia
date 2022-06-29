@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->dateTime('hora');
             $table->foreignId('empleado_id')
-                ->constrained('empleados');
+                ->constrained('empleados')->onUpdate('cascade') ->onDelete('cascade');
             $table->timestamps();
         });
     }
