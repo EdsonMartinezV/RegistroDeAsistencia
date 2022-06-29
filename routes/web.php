@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\FaltasController;
 use Illuminate\Support\Facades\Route;
@@ -33,3 +34,7 @@ Route::get('menu', function() {
 Route::post('/validar-asistencia', [RegistroController::class, 'validarAsistencia'])->name('validarAsistencia');
 
 Route::get('/obtener-faltas', [FaltasController::class, 'obtenerFaltas'])->name('obtenerFaltas');
+Route::get('/empleados', [EmpleadoController::class, 'mostrarEmpleados'])->name('empleados');
+
+Route::get('/empleados/{empleadoId}', [EmpleadoController::class, 'mostrarEmpleado'])->name('empleado');
+Route::get('/obtener-faltas', [RegistroController::class, 'validarAsistencia'])->name('validarAsistencia');
