@@ -18,7 +18,7 @@ class FaltasController extends Controller
         ->where('inicio_periodo_laboral', '<=', $dia)
         ->where('fin_periodo_laboral', '>=', $dia)
         ->get();
-    
+        dd($periodo);
         return $this->verificarFaltas($datos,$periodo,$id);
          
     }

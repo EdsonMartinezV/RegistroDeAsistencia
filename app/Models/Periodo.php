@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Periodo extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $fillable = [
         'inicio_periodo_laboral',
         'fin_periodo_laboral',
