@@ -19,11 +19,11 @@ class FaltasController extends Controller
         ->where('fin_periodo_laboral', '>=', $dia)
         ->get();
         dd($periodo);
-        return $this->verificarFaltas($datos,$periodo,$id);
+        return $this->obtenerRegistros($datos,$periodo,$id);
          
     }
 
-    public function verificarFaltas($datos,$periodo,$id){
+    public function obtenerRegistros($datos,$periodo,$id){
 
          
     }

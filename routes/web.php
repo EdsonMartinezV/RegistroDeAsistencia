@@ -43,6 +43,3 @@ Route::get('/empleados', [EmpleadoController::class, 'mostrarEmpleados'])->name(
 
 Route::get('/cardex/{empleadoId}', [EmpleadoController::class, 'mostrarCardex'])->name('cardex');
 
-Route::get('/faltas/{empleadoId}', [EmpleadoController::class, 'mostrarFaltas'])->name('faltas');
-
-Route::get('/obtener-faltas', [RegistroController::class, 'validarAsistencia'])->name('validarAsistencia');
