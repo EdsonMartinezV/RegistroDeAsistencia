@@ -92,7 +92,6 @@
             </table>
             @dump($registros)
             @dump($registro)
-            @dump($fecha)
         </div>
     </main>
     @endsection

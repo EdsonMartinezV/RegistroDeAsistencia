@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
         Periodo::factory(10)->create();
         $this->call(DiaSeeder::class);
         //Dia::factory(10)->create(); 
-        //Registro::factory(100)->create();
+        Registro::factory(100)->create();
         $this->call(IncidenciaSeeder::class);
         Justificante::factory(10)->create(); 
         
