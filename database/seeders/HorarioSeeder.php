@@ -22,7 +22,7 @@ class HorarioSeeder extends Seeder
             'hora_inicio_checada_entrada' => '7:30',
             'hora_fin_checada_entrada' => '8:40',
             'hora_inicio_checada_salida' => '15:00',
-            'hora_fin_checada_entrada' => '16:00',
+            'hora_fin_checada_salida' => '16:00',
         ]);
         Horario::create([
             'hora_entrada' => '9:00',
@@ -31,7 +31,7 @@ class HorarioSeeder extends Seeder
             'hora_inicio_checada_entrada' => '8:30',
             'hora_fin_checada_entrada' => '9:40',
             'hora_inicio_checada_salida' => '16:00',
-            'hora_fin_checada_entrada' => '17:00',
+            'hora_fin_checada_salida' => '17:00',
         ]);
         Horario::create([
             'hora_entrada' => '20:00',
@@ -40,7 +40,7 @@ class HorarioSeeder extends Seeder
             'hora_inicio_checada_entrada' => '19:30',
             'hora_fin_checada_entrada' => '20:40',
             'hora_inicio_checada_salida' => '7:30',
-            'hora_fin_checada_entrada' => '8:30',
+            'hora_fin_checada_salida' => '8:30',
         ]);
         Horario::create([
             'hora_entrada' => '20:00',
@@ -49,7 +49,7 @@ class HorarioSeeder extends Seeder
             'hora_inicio_checada_entrada' => '19:30',
             'hora_fin_checada_entrada' => '20:40',
             'hora_inicio_checada_salida' => '19:30',
-            'hora_fin_checada_entrada' => '20:40',
+            'hora_fin_checada_salida' => '20:40',
         ]);
     }
 }
