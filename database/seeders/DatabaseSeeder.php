@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
         /* $this->call(DiaFestivoSeeder::class);
         $this->call(IncidenciaSeeder::class);
         $this->call(SubtipoDeIncidenciaSeeder::class); */
+        $this->call(SuptipoDeIncidenciaSeeder::class);
          /*App\Models\User::factory(10)->create();
 
          App\Models\User::factory()->create([

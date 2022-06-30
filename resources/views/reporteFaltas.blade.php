@@ -16,8 +16,9 @@
     <title>Reporte de faltas</title>
 </head>
 <body>
-    <form action="{{ route('validarAsistencia') }}" method="GET">
-        @csrf
+    @csrf
+    <form action="{{ route('obtenerFaltas', $id) }}" method="GET">
+       
     <h1>Reporte de faltas</h1>
     <div class="container py-5 h-100">
         <div class="row justify-content-center align-items-center h-100">
@@ -27,7 +28,7 @@
                         <div class="form-group">
                             <h6>Fecha Inicio</h6>
                            <div class='input-group date' id='datetimepicker1'>
-                              <input type='text' class="form-control"/>
+                              <input type='text' class="form-control" name="inicio"/>
                               <span class="input-group-addon">
                               <span class="glyphicon glyphicon-calendar"></span>
                               </span>
@@ -38,24 +39,26 @@
                         <div class="form-group">
                             <h6>Fecha Termino</h6>
                            <div class='input-group date' id='datetimepicker2'>
-                              <input type='text' class="form-control"/>
+                              <input type='text' class="form-control" name="Termino"/>
                               <span class="input-group-addon">
                               <span class="glyphicon glyphicon-calendar"></span>
                               </span>
                            </div>
                         </div>
                      </div>
-                     <div class='col-sm-6'>
-                        <div class="form-group">
-                            <input class="btn btn-primary btn-lg" type="submit" value="Obtener" />
-                        </div>
+                     
                      </div>
                      <script type="text/javascript">
                         $(function () {
                             $('#datetimepicker1').datetimepicker();
                             $('#datetimepicker2').datetimepicker();
                         });
+                        
                      </script>
+                     <div class='col-sm-6'>
+                        <div class="form-group">
+                            <input class="btn btn-primary btn-lg" type="submit" value="Obtener" />
+                        </div>
                 </div>
             </form> 
                 <br>
@@ -71,12 +74,15 @@
                         
                     </thead>
                     <tbody>
+                        
                         <tr> 
+                        @if (!empty($datos))
+                            <td>hola </td>
                             <td> </td>
                             <td> </td>
                             <td> </td>
-                            <td> </td>
-                            
+                        @endif
+                                
                         </tr>     
                     </tbody>
                 </table>

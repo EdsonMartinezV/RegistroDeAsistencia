@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('descripcion');
             $table->foreignId('catalogo_de_incidencias_id')
-                ->constrained('catalogo_de_incidencias');
+                ->constrained('catalogo_de_incidencias')->onUpdate('cascade') ->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('curp');
             $table->string('tipo_trabajador');
             $table->foreignId('catalogo_de_clues_id')
-                ->constrained('catalogo_de_clues');
+                ->constrained('catalogo_de_clues')->onUpdate('cascade') ->onDelete('cascade');
           
         });
     }

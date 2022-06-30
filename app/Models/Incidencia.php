@@ -9,6 +9,7 @@ class Incidencia extends Model
 {
     use HasFactory;
     protected $table = 'catalogo_de_incidencias';
+    public $timestamps = false;
     protected $fillable = [
         'tipo',
         'resultante',
