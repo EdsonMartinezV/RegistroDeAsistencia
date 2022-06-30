@@ -12,8 +12,9 @@ class EmpleadoController extends Controller
         return view('empleados', compact('empleados'));
     }
 
-    public function mostrarEmpleado($empleadoId){
+    public function mostrarCardex($empleadoId) {
         $empleado = Empleado::find($empleadoId);
-        return view('empleado', compact('empleado'));
+        $registros = $empleado->registros()->orderBy('hora', 'asc')->get();
+        return view('cardex', compact('registros'));
     }
 }

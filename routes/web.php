@@ -19,14 +19,14 @@ Route::get('/', function () {
     return view('asistencia');
 })->name('formularioAsistencia');
 
-Route::get('cardex', function() {
+Route::get('/cardex', function() {
     return view('cardex');
 });
 
-Route::get('reporteFaltas', function() {
+Route::get('/reporteFaltas', function() {
     return view('reporteFaltas');
 });
-Route::get('menu', function() {
+Route::get('/menu', function() { 
     return view('navbar');
 });
 
@@ -34,5 +34,8 @@ Route::post('/validar-asistencia', [RegistroController::class, 'validarAsistenci
 
 Route::get('/empleados', [EmpleadoController::class, 'mostrarEmpleados'])->name('empleados');
 
-Route::get('/empleados/{empleadoId}', [EmpleadoController::class, 'mostrarEmpleado'])->name('empleado');
+Route::get('/cardex/{empleadoId}', [EmpleadoController::class, 'mostrarCardex'])->name('cardex');
+
+Route::get('/faltas/{empleadoId}', [EmpleadoController::class, 'mostrarFaltas'])->name('faltas');
+
 Route::get('/obtener-faltas', [RegistroController::class, 'validarAsistencia'])->name('validarAsistencia');
