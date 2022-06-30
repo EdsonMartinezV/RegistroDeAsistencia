@@ -19,8 +19,8 @@ class JustificanteFactory extends Factory
     public function definition()
     {
         return [
-            'id_empleado' => Empleado::all()->random()->id,
-            'id_catalogo_de_incidencias' => Incidencia::all()->random()->id,
+            'empleado_id' => Empleado::all()->random()->id,
+            'catalogo_de_incidencias_id' => Incidencia::all()->random()->id,
             'tipo' => $this->faker->name,
             'fecha_inicio' => $this->faker->dateTime($max = 'now'),
             'fecha_final' => $this->faker->dateTime($max = 'now'),

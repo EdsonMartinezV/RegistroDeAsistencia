@@ -20,21 +20,10 @@ Route::get('/', function () {
     return view('asistencia');
 })->name('formularioAsistencia');
 
-Route::get('reporteFaltas/{id}', function($id) {
-    return view('reporteFaltas',compact('id'));
-})->name('faltas');
-
-Route::get('/reporteFaltas', function() {
-    return view('reporteFaltas');
-})->name('faltasDatos');
-
-Route::get('menu', function() {
-    return view('navbar');
-});
-
 Route::post('/validar-asistencia', [RegistroController::class, 'validarAsistencia'])->name('validarAsistencia');
 
 Route::get('/obtener-faltas/{id}', [FaltasController::class, 'verificarPeriodo'])->name('obtenerFaltas');
+
 Route::get('/empleados', [EmpleadoController::class, 'mostrarEmpleados'])->name('empleados');
 
 Route::get('/cardex/{empleadoId}', [EmpleadoController::class, 'mostrarCardex'])->name('cardex');

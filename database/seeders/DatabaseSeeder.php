@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-         Clues::factory(10)->create();
+        Clues::factory(10)->create();
         Empleado::factory(10)->create();
         $this->call(HorarioSeeder::class);
         //Horario::factory(10)->create();
@@ -29,11 +29,10 @@ class DatabaseSeeder extends Seeder
         $this->call(DiaSeeder::class);
         //Dia::factory(10)->create(); 
         //Registro::factory(100)->create();
+        $this->call(IncidenciaSeeder::class);
         Justificante::factory(10)->create(); 
         
-         $this->call(DiaFestivoSeeder::class);
-        $this->call(IncidenciaSeeder::class);
-        $this->call(SubtipoDeIncidenciaSeeder::class); 
+        $this->call(DiaFestivoSeeder::class);
         $this->call(SuptipoDeIncidenciaSeeder::class);
        /*  $this->call(DiaSeeder::class);
         $this->call(HorarioSeeder::class); */
