@@ -1,3 +1,4 @@
+@extends('navbar')
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,7 +10,6 @@
   <title>Formulario de registro</title>
 </head>
 <body>
-  @extends('navbar');
   @section('content')
     <section class="vh-100 gradient-custom">
       <div class="container py-5 h-100">
