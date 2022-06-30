@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Empleado;
+use DateTime;
 use Illuminate\Http\Request;
 
 class EmpleadoController extends Controller
@@ -15,6 +16,8 @@ class EmpleadoController extends Controller
     public function mostrarCardex($empleadoId) {
         $empleado = Empleado::find($empleadoId);
         $registros = $empleado->registros()->orderBy('hora', 'asc')->get();
-        return view('cardex', compact('registros'));
+        $registro = $registros->first()->hora;
+        $fecha = new DateTime($registro);
+        return view('cardex', compact('registros', 'registro', 'fecha'));
     }
 }

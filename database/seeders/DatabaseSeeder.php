@@ -27,17 +27,18 @@ class DatabaseSeeder extends Seeder
         Periodo::factory(10)->create();
         Dia::factory(10)->create(); */
         Registro::factory(100)->create();
-        //Justificante::factory(10)->create(); 
         
-        /* $this->call(DiaFestivoSeeder::class);
+        /* Justificante::factory(10)->create(); 
+        
+        $this->call(DiaFestivoSeeder::class);
         $this->call(IncidenciaSeeder::class);
-        $this->call(SubtipoDeIncidenciaSeeder::class); */
+        $this->call(SubtipoDeIncidenciaSeeder::class);
         $this->call(SuptipoDeIncidenciaSeeder::class);
-         /*App\Models\User::factory(10)->create();
+         App\Models\User::factory(10)->create();
 
          App\Models\User::factory()->create([
              'name' => 'Test User',
              'email' => 'test@example.com',
-         ]);*/
+         ]); */
     }
 }
