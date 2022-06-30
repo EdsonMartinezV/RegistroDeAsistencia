@@ -21,20 +21,23 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        /* Clues::factory(10)->create();
+         Clues::factory(10)->create();
         Empleado::factory(10)->create();
-        Horario::factory(10)->create();
+        $this->call(HorarioSeeder::class);
+        //Horario::factory(10)->create();
         Periodo::factory(10)->create();
-        Dia::factory(10)->create(); */
-        Registro::factory(100)->create();
+        $this->call(DiaSeeder::class);
+        //Dia::factory(10)->create(); 
+        //Registro::factory(100)->create();
+        Justificante::factory(10)->create(); 
         
-        /* Justificante::factory(10)->create(); 
-        
-        $this->call(DiaFestivoSeeder::class);
+         $this->call(DiaFestivoSeeder::class);
         $this->call(IncidenciaSeeder::class);
-        $this->call(SubtipoDeIncidenciaSeeder::class);
+        $this->call(SubtipoDeIncidenciaSeeder::class); 
         $this->call(SuptipoDeIncidenciaSeeder::class);
-         App\Models\User::factory(10)->create();
+       /*  $this->call(DiaSeeder::class);
+        $this->call(HorarioSeeder::class); */
+         /*App\Models\User::factory(10)->create();
 
          App\Models\User::factory()->create([
              'name' => 'Test User',
