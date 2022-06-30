@@ -7,23 +7,28 @@
     <title>Empleados</title>
 </head>
 <body>
-    <h1>Empleados</h1>
-    <thead>
-        <tr>
-            <th scope="col">Nombre</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($empleados as $empleado)
-            <tr>
-                <td>{{ $empleado->nombre }}</td>
-                <td><a href="{{ route('cardex', $empleado->id) }}">Cardex</a></td>
-                <td><a href="{{ route('faltas', $empleado->id) }}">Reporte de Faltas</a></td>
-                <br>
-            </tr>
-        @endforeach
-    </tbody>
+    @extends('navbar')
+    @section('content')
+        <h1>Empleados</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($empleados as $empleado)
+                    <tr>
+                        <td>{{ $empleado->nombre }}</td>
+                        <td><a href="{{ route('cardex', $empleado->id) }}">Cardex</a></td>
+                        <td><a href="{{ route('faltas', $empleado->id) }}">Reporte de Faltas</a></td>
+                    </tr>
+                    <br>
+                @endforeach
+            </tbody>
+        </table>
+    @endsection
 </body>
 </html>
