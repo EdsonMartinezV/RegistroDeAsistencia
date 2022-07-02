@@ -25,14 +25,20 @@ class EmpleadoController extends Controller
 
     public function Faltas(Request $request, $id) {
         // $Periodo = Empleado::find($id)->dias;
-       /*  $Periodo = Empleado::find(1)->whereHas('dias', function($query) {
+         /*$Periodo = Empleado::find(1)->whereHas('dias', function($query) {
             $query->whereHas('horarios', function($qry) {
                 $qry->get();
             });
-        });
-        dd($Periodo); */
-        $Periodo = Empleado::find($id)->dias;
-        dd($Periodo);
+        });*/
+        // dd($Periodo);
+        $registros = Empleado::find($id)->registros;
+
+        $reportes_faltas = Empleado::join('periodos','empleados.id', '=', 'periodos.empleado_id')
+        -> join('dias','periodos.id', '=', 'dias.periodo_id')
+        -> join('catalogo_de_horarios','dias.catalogo_de_horarios_id', '=', 'catalogo_de_horarios.id')
+        -> where ([['empleados.id','=',$id]])
+        ->get();
+        dd($reportes_faltas);
         return view('cardex', compact('registros', 'registro', 'fecha'));
     }
 }
