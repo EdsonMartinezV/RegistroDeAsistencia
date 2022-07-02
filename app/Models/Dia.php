@@ -23,4 +23,5 @@ class Dia extends Model
     public function horarios(){
         return $this->belongsToMany(Horario::class);
     }
+    
 }

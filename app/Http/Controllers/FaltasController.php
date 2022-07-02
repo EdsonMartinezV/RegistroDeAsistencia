@@ -21,6 +21,7 @@ class FaltasController extends Controller
         ->where('inicio_periodo_laboral', '<=', $dia)
         ->where('fin_periodo_laboral', '>=', $dia)
         ->First();
+       
         return $this->obtenerRegistros($datos,$periodo,$id);
          
     }
@@ -28,6 +29,7 @@ class FaltasController extends Controller
     public function obtenerRegistros($datos,$periodo,$id){
         $registros=Registro::whereBetween('hora', [$datos['inicio'], $datos['Termino']])
         ->get();
+    
         return $this->obtenerDias($datos,$periodo,$id,$registros);
     }
 
@@ -35,8 +37,10 @@ class FaltasController extends Controller
         $dias=Dia::where('periodo_id','=', $periodo['id'])
         ->get();
         // dd($dias);
-        $registros->foreach(function($registro){
-            dd($registro->dia);
-        });
+     return $this->validarAsistencia($datos,$periodo,$id,$registros, $dias);
+    }
+    public function validarAsistencia($datos, $periodo, $id,$registros,$dias) {
+
+     
     }
 }

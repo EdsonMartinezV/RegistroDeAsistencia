@@ -23,4 +23,9 @@ class Periodo extends Model
     public function dias(){
         return $this->belongsToMany(Dia::class);
     }
+
+    public function horarios(){
+        return $this->hasManyThrough(Horario::class,Dia::class);
+    }
+
 }

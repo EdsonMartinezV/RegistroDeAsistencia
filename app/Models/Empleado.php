@@ -5,8 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Empleado extends Model
 {
+   
     use HasFactory;
     public $timestamps = false;
     protected $fillable = [
@@ -31,5 +33,12 @@ class Empleado extends Model
 
     public function periodos(){
         return $this->hasMany(Periodo::class);
+    }
+
+    public function dias(){
+        return $this->hasManyThrough(Dia::class,Periodo::class);
+    }
+    public function horarios(){
+        return $this->hasManyThrough(Horario::class,Dia::class);
     }
 }

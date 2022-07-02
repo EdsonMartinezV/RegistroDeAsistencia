@@ -26,9 +26,11 @@ Route::get('reporteFaltas/{id}', function($id) {
 
 Route::post('/validar-asistencia', [RegistroController::class, 'validarAsistencia'])->name('validarAsistencia');
 
-Route::get('/obtener-faltas/{id}', [FaltasController::class, 'verificarPeriodo'])->name('obtenerFaltas');
+// Route::get('/obtener-faltas/{id}', [FaltasController::class, 'verificarPeriodo'])->name('obtenerFaltas');
 
 Route::get('/empleados', [EmpleadoController::class, 'mostrarEmpleados'])->name('empleados');
+
+Route::get('/obtener-faltas/{id}', [EmpleadoController::class, 'faltas'])->name('obtenerFaltas');
 
 Route::get('/cardex/{empleadoId}', [EmpleadoController::class, 'mostrarCardex'])->name('cardex');
 
