@@ -8,6 +8,7 @@ use App\Models\Periodo;
 use App\Models\Horario;
 use App\Models\Registro;
 use App\Models\Dia;
+use Carbon\Carbon;
 
 class FaltasController extends Controller
 {
@@ -33,7 +34,9 @@ class FaltasController extends Controller
     public function obtenerDias($datos, $periodo, $id,$registros) {
         $dias=Dia::where('periodo_id','=', $periodo['id'])
         ->get();
-        dd($dias);
-
+        // dd($dias);
+        $registros->foreach(function($registro){
+            dd($registro->dia);
+        });
     }
 }
