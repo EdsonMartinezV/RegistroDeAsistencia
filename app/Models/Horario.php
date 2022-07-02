@@ -20,7 +20,8 @@ class Horario extends Model
         'hora_fin_checada_salida'
     ];
 
-    public function dias(){
-        return $this->belongsToMany(Dia::class);
+    public function periodos(){
+        return $this->belongsToMany(Periodo::class, 'dias', $relatedPivotKey = 'catalogo_de_horarios_id')
+            ->withPivot('dia_entrada', 'dia_salida');
     }
 }

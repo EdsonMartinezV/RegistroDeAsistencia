@@ -28,12 +28,13 @@ class EmpleadoController extends Controller
 
     public function mostrarCardex($empleadoId) {
         date_default_timezone_set("America/Mexico_City");
+        global $dias;
         $empleado = Empleado::find($empleadoId);
         $registros = $empleado->registros()->orderBy('hora', 'asc')->get();
         $registro = $registros->first()->hora;
         $fecha = new Carbon($registro);
         $dia = $fecha->day;
-        dd($fecha, EmpleadoController::$dias[$fecha->dayName]);
+        dd($fecha, $dias[$fecha->dayName]);
 
         /* $cardex = [
             'enero' => {
