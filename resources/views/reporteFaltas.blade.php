@@ -76,11 +76,16 @@
                     <tbody>
                         
                         <tr> 
-                        @if (!empty($datos))
-                            <td>hola </td>
-                            <td> </td>
-                            <td> </td>
-                            <td> </td>
+                        @if (!empty($fechas))
+                           @foreach ($fechas as $fecha)
+                                <td>{{ \Carbon\Carbon::parse($fecha->from_date)->format('d/m/Y')}}</td>
+                                <td> </td>
+                                <td> </td>
+                                <td> </td>
+                           @endforeach
+
+
+                            
                         @endif
                                 
                         </tr>     

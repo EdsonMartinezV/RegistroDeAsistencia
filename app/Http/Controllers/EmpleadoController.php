@@ -9,6 +9,8 @@ use App\Models\Registro;
 use DateTime;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use DatePeriod;
+use DateInterval;
 
 class EmpleadoController extends Controller
 {
@@ -57,12 +59,17 @@ class EmpleadoController extends Controller
      /*     $Periodo = Empleado::find(1)->periodos;
         dd($Periodo); */
 
-        $fechas = $request->all();
+        //obtener un intervalo que se puede recorrer entre las fechas que se requiere
+        $inicio = new Carbon($request->inicio);
+        $final = new Carbon($request->Termino);
+        $intervalo = DateInterval::createFromDateString('1 day');
+        $fechas = new DatePeriod($inicio, $intervalo, $final);
 
+        //obtencion de los registros entre las fechas que se requieren
         $registros = Empleado::find($id)->registros()->whereBetween('hora', [$request->inicio, $request->Termino])
         ->orderBy('hora', 'asc')->get();
         
-
+        //obtención de los dias de los periodos del empleado y catalogo horas de entrada/salida
         $horario = Empleado::find($id)
         ->join('periodos','empleados.id', '=', 'periodos.empleado_id')->where('periodos.empleado_id','=',$id)
         -> join('dias','periodos.id', '=', 'dias.periodo_id')
@@ -76,7 +83,8 @@ class EmpleadoController extends Controller
         ->get(); */
 
         // $registros =Empleado::find($id)->registros;
+        
      
-        return view('asistencia', compact('fechas', 'horario', 'registros'));
+        return view('reporteFaltas', compact('fechas', 'horario', 'registros','id'));
     }
 }
