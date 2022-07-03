@@ -8,6 +8,7 @@ use App\Models\Periodo;
 use App\Models\Horario;
 use App\Models\Registro;
 use App\Models\Dia;
+use Carbon\Carbon;
 
 class FaltasController extends Controller
 {
@@ -36,7 +37,7 @@ class FaltasController extends Controller
         $dias=Dia::where('periodo_id','=', $periodo['id'])
         ->get();
         // dd($dias);
-     return $this->validarAsistencia($datos,$periodo,$id,$registros);
+     return $this->validarAsistencia($datos,$periodo,$id,$registros, $dias);
     }
     public function validarAsistencia($datos, $periodo, $id,$registros,$dias) {
 

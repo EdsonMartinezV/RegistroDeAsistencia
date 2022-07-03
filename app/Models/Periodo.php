@@ -20,12 +20,9 @@ class Periodo extends Model
         return $this->belongsTo(Empleado::class);
     }
 
-    public function dias(){
-        return $this->belongsToMany(Dia::class);
-    }
-
     public function horarios(){
-        return $this->hasManyThrough(Horario::class,Dia::class);
+        return $this->belongsToMany(Horario::class, 'dias', 'catalogo_de_horarios_id')
+            ->withPivot('dia_entrada', 'dia_salida');
     }
 
 }
