@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('justificante');
+    return view('asistencia');
 })->name('formularioAsistencia');
 
 Route::get('cardex/{id}', function() {
