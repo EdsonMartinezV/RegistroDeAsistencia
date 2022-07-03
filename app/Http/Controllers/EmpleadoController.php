@@ -76,6 +76,18 @@ class EmpleadoController extends Controller
         -> join('catalogo_de_horarios','dias.catalogo_de_horarios_id', '=', 'catalogo_de_horarios.id')
         ->get(); 
 
+        $reporte_faltas = []; 
+        $i = 0;
+        foreach($fechas as $fecha){
+
+            $reporte_faltas[strval($i+1)] = [
+                'dia' => $fecha->dayName,
+                'fecha' => $fecha->toDateString(),
+            ];
+           
+            $i++;
+        }
+        dd($reporte_faltas);
         /* $reportes_faltas = Empleado::join('periodos','empleados.id', '=', 'periodos.empleado_id')
         -> join('dias','periodos.id', '=', 'dias.periodo_id')
         -> join('catalogo_de_horarios','dias.catalogo_de_horarios_id', '=', 'catalogo_de_horarios.id')
@@ -84,6 +96,7 @@ class EmpleadoController extends Controller
 
         // $registros =Empleado::find($id)->registros;
         
+        //recorremos el intervalo para ir guardando los datos del reporte de kardex
      
         return view('reporteFaltas', compact('fechas', 'horario', 'registros','id'));
     }
