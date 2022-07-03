@@ -78,13 +78,22 @@ class EmpleadoController extends Controller
 
         $reporte_faltas = []; 
         $i = 0;
+        //recorremos el intervalo de fechas
         foreach($fechas as $fecha){
-
+            //guardamos el dia y fecha
             $reporte_faltas[strval($i+1)] = [
                 'dia' => $fecha->dayName,
                 'fecha' => $fecha->toDateString(),
             ];
-           
+            //guardamos el registro falta guardar sin borrar checar si funciona push
+            foreach($registros as $registro){
+                $hora = new Carbon($registro->hora);
+                if($hora->toDateString() == $fecha->toDateString()){
+                    $reporte_faltas[$i+1] = [
+                        'hora_entrada' => $registro->hora,
+                    ]; 
+                }
+            }
             $i++;
         }
         dd($reporte_faltas);
