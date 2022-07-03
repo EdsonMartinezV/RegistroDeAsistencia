@@ -35,10 +35,7 @@ class Empleado extends Model
         return $this->hasMany(Periodo::class);
     }
 
-    public function dias(){
-        return $this->hasManyThrough(Dia::class,Periodo::class);
-    }
-    public function horarios(){
-        return $this->hasManyThrough(Horario::class,Dia::class);
-    }
+    /* public function horarios(){
+        return $this->hasManyThrough(Horario::class,Periodo::class);
+    } */
 }

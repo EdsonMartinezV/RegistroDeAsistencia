@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Empleado;
 use App\Models\Dia;
 use App\Models\Periodo;
+use App\Models\Registro;
 use DateTime;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -53,19 +54,20 @@ class EmpleadoController extends Controller
 
     public function Faltas(Request $request, $id) {
         // $Periodo = Empleado::find($id)->dias;
-         /*$Periodo = Empleado::find(1)->whereHas('dias', function($query) {
-            $query->whereHas('horarios', function($qry) {
-                $qry->get();
-            });
-        });*/
+         /* $Periodo = Empleado::find(1)->periodos; */
         // dd($Periodo);
-        $registros = Empleado::find($id)->registros;
-
-        $reportes_faltas = Empleado::join('periodos','empleados.id', '=', 'periodos.empleado_id')
+    /*  $registros = Empleado::find($id)->registros()->whereBetween('hora', [$request->inicio, $request->Termino])
+        ->get();
+        dd($registros); */
+//
+        $reportes_faltas = Empleado::find($id)
+        -> join('registros','empleados.id', '=', 'registros.empleado_id') ->whereBetween('hora', [$request->inicio, $request->Termino])->where('registros.empleado_id','=',$id)
+        ->join('periodos','empleados.id', '=', 'periodos.empleado_id')->where('periodos.empleado_id','=',$id)
         -> join('dias','periodos.id', '=', 'dias.periodo_id')
         -> join('catalogo_de_horarios','dias.catalogo_de_horarios_id', '=', 'catalogo_de_horarios.id')
-        -> where ([['empleados.id','=',$id]])
-        ->get();
+        ->get(); 
+
+
         dd($reportes_faltas);
         return view('cardex', compact('registros', 'registro', 'fecha'));
     }
