@@ -54,21 +54,29 @@ class EmpleadoController extends Controller
 
     public function Faltas(Request $request, $id) {
         // $Periodo = Empleado::find($id)->dias;
-         /* $Periodo = Empleado::find(1)->periodos; */
-        // dd($Periodo);
-    /*  $registros = Empleado::find($id)->registros()->whereBetween('hora', [$request->inicio, $request->Termino])
-        ->get();
-        dd($registros); */
-//
-        $reportes_faltas = Empleado::find($id)
-        -> join('registros','empleados.id', '=', 'registros.empleado_id') ->whereBetween('hora', [$request->inicio, $request->Termino])->where('registros.empleado_id','=',$id)
+     /*     $Periodo = Empleado::find(1)->periodos;
+        dd($Periodo); */
+
+        $fechas = $request->all();
+
+        $registros = Empleado::find($id)->registros()->whereBetween('hora', [$request->inicio, $request->Termino])
+        ->orderBy('hora', 'asc')->get();
+        
+
+        $horario = Empleado::find($id)
         ->join('periodos','empleados.id', '=', 'periodos.empleado_id')->where('periodos.empleado_id','=',$id)
         -> join('dias','periodos.id', '=', 'dias.periodo_id')
         -> join('catalogo_de_horarios','dias.catalogo_de_horarios_id', '=', 'catalogo_de_horarios.id')
         ->get(); 
 
+        /* $reportes_faltas = Empleado::join('periodos','empleados.id', '=', 'periodos.empleado_id')
+        -> join('dias','periodos.id', '=', 'dias.periodo_id')
+        -> join('catalogo_de_horarios','dias.catalogo_de_horarios_id', '=', 'catalogo_de_horarios.id')
+        -> where ([['empleados.id','=',$id]])
+        ->get(); */
 
-        dd($reportes_faltas);
-        return view('cardex', compact('registros', 'registro', 'fecha'));
+        // $registros =Empleado::find($id)->registros;
+     
+        return view('asistencia', compact('fechas', 'horario', 'registros'));
     }
 }

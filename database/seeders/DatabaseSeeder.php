@@ -34,8 +34,8 @@ class DatabaseSeeder extends Seeder
         
         $this->call(DiaFestivoSeeder::class);
         $this->call(SuptipoDeIncidenciaSeeder::class);
-       /*  $this->call(DiaSeeder::class);
-        $this->call(HorarioSeeder::class); */
+        $this->call(DiaSeeder::class);
+        $this->call(HorarioSeeder::class);
          /*App\Models\User::factory(10)->create();
 
          App\Models\User::factory()->create([
