@@ -7,7 +7,6 @@ use App\Models\Dia;
 use App\Models\Incidencia;
 use App\Models\Periodo;
 use App\Models\Registro;
-use App\Models\Incidencia;
 use DateTime;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
