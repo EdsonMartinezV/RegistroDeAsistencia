@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Empleado;
 use App\Models\Dia;
+use App\Models\Incidencia;
 use App\Models\Periodo;
 use App\Models\Registro;
 use App\Models\Incidencia;
@@ -15,14 +16,19 @@ use DateInterval;
 
 class EmpleadoController extends Controller
 {
-    var $dias = [
-        'Monday' => 'Lunes',
-        'Thursday' => 'Martes',
-        'Wednesday' => 'Miercoles',
-        'Tuesday' => 'Jueves',
-        'Friday' => 'Viernes',
-        'Saturday' => 'Sabado',
-        'Sunday' => 'Domingo'
+    var $meses = [
+        'January' => 'Enero',
+        'February' => 'Febrero',
+        'March' => 'Marzo',
+        'April' => 'Abril',
+        'May' => 'Mayo',
+        'June' => 'Junio',
+        'July' => 'Julio',
+        'August' => 'Agosto',
+        'September' => 'Septiembre',
+        'October' => 'Octubre',
+        'November' => 'Noviembre',
+        'December' => 'Diciembre'
     ];
 
     public function mostrarEmpleados(){
@@ -32,27 +38,27 @@ class EmpleadoController extends Controller
 
     public function mostrarCardex($empleadoId) {
         date_default_timezone_set("America/Mexico_City");
-        global $dias;
+        $dias = [
+            'Monday' => 'Lunes',
+            'Thursday' => 'Martes',
+            'Wednesday' => 'Miercoles',
+            'Tuesday' => 'Jueves',
+            'Friday' => 'Viernes',
+            'Saturday' => 'Sabado',
+            'Sunday' => 'Domingo'
+        ];
         $empleado = Empleado::find($empleadoId);
-        $registros = $empleado->registros()->orderBy('hora', 'asc')->get();
-        $registro = $registros->first()->hora;
-        $fecha = new Carbon($registro);
-        $dia = $fecha->day;
-        dd($fecha, $dias[$fecha->dayName]);
+        $justificantes = $empleado->justificantes()->orderBy('fecha_inicio', 'asc')->get();
+        /* $justificante = $justificantes->first();
+        $fecha = new Carbon($justificante->fecha_inicio); */
 
-        /* $cardex = [
-            'enero' => {
-                1=>
-                2=>
-            };
-        ]; */
-        $registros->foreach(function($registro) {
-            $fecha = new Carbon($registro->hora);
-            $mesActual = $fecha->month;
-            $cardex[$mesActual] = $fecha->monthName;
-        });
+        $cardex = [];
+        foreach($justificantes as $justificante) {
+            $fecha = new Carbon($justificante->fecha_inicio);
+            $cardex[$fecha->year][$fecha->monthName][$fecha->day] = [Incidencia::where('id', '=', $justificante->catalogo_de_incidencias_id)->first()->tipo];
+        }
 
-        return view('cardex', compact('registros', 'registro', 'fecha'));
+        return view('cardex', compact('cardex'));
     }
 
     public function Faltas(Request $request, $id) {

@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('justificantes', function (Blueprint $table) {
             $table->id();
-            $table->string('tipo');
             $table->dateTime('fecha_inicio');
             $table->dateTime('fecha_final');
             $table->string('horario');
