@@ -53,41 +53,21 @@
                     </tr>
                 </thead>
                 <tbody class="table table-striped">
-                    <tr> 
-                        <td> 2022 </td>
-                        <td> Junio </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                        <td>  </td>
-                    </tr>
+                    @foreach ($cardex as $anio)
+                        <tr>
+                            @foreach ($anio as $mes)
+                                <th>{{ $mes['anio'] }}</th>
+                                <th>{{ $mes['mes'] }}</th>
+                                @for ($i = 1; $i <= 31; $i++)
+                                    @if (array_key_exists($i, $mes['dias']))
+                                        <th>{{ $mes['dias'][$i] }}</th>
+                                    @else
+                                        <th></th>
+                                    @endif
+                                @endfor
+                            @endforeach
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
             @dump($cardex)

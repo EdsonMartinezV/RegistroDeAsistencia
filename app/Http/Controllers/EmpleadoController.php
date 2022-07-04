@@ -15,6 +15,16 @@ use DateInterval;
 
 class EmpleadoController extends Controller
 {
+    var $dias = [
+        'Monday' => 'Lunes',
+        'Thursday' => 'Martes',
+        'Wednesday' => 'Miercoles',
+        'Tuesday' => 'Jueves',
+        'Friday' => 'Viernes',
+        'Saturday' => 'Sabado',
+        'Sunday' => 'Domingo'
+    ];
+
     var $meses = [
         'January' => 'Enero',
         'February' => 'Febrero',
@@ -37,24 +47,14 @@ class EmpleadoController extends Controller
 
     public function mostrarCardex($empleadoId) {
         date_default_timezone_set("America/Mexico_City");
-        $dias = [
-            'Monday' => 'Lunes',
-            'Thursday' => 'Martes',
-            'Wednesday' => 'Miercoles',
-            'Tuesday' => 'Jueves',
-            'Friday' => 'Viernes',
-            'Saturday' => 'Sabado',
-            'Sunday' => 'Domingo'
-        ];
-        $empleado = Empleado::find($empleadoId);
-        $justificantes = $empleado->justificantes()->orderBy('fecha_inicio', 'asc')->get();
-        /* $justificante = $justificantes->first();
-        $fecha = new Carbon($justificante->fecha_inicio); */
-
+        $justificantes = Empleado::find($empleadoId)->justificantes()->orderBy('fecha_inicio', 'asc')->get();
         $cardex = [];
+
         foreach($justificantes as $justificante) {
             $fecha = new Carbon($justificante->fecha_inicio);
-            $cardex[$fecha->year][$fecha->monthName][$fecha->day] = [Incidencia::where('id', '=', $justificante->catalogo_de_incidencias_id)->first()->tipo];
+            $cardex[$fecha->year][$fecha->month]['anio'] = $fecha->year;
+            $cardex[$fecha->year][$fecha->month]['mes'] = $this->meses[$fecha->monthName];
+            $cardex[$fecha->year][$fecha->month]['dias'][$fecha->day] = Incidencia::where('id', '=', $justificante->catalogo_de_incidencias_id)->first()->tipo;
         }
 
         return view('cardex', compact('cardex'));

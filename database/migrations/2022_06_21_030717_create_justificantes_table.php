@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('justificantes', function (Blueprint $table) {
             $table->id();
             $table->dateTime('fecha_inicio');
-            $table->dateTime('fecha_final');
+            $table->dateTime('fecha_final')
+                ->nullable();
             $table->string('horario');
             $table->integer('num_memorandum');
             $table->foreignId('empleado_id')
