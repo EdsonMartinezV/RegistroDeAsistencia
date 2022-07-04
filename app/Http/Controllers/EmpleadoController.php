@@ -6,6 +6,7 @@ use App\Models\Empleado;
 use App\Models\Dia;
 use App\Models\Periodo;
 use App\Models\Registro;
+use App\Models\Incidencia;
 use DateTime;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -76,7 +77,10 @@ class EmpleadoController extends Controller
         -> join('catalogo_de_horarios','dias.catalogo_de_horarios_id', '=', 'catalogo_de_horarios.id')
         ->get(); 
 
-    
+        //obtención de los justificantes
+        $justificantes = Empleado::find($id)->justificantes()->orderBy('fecha_inicio', 'asc')->get();
+
+
         $reporte_faltas = []; 
         $i = 0;
         //recorremos el intervalo de fechas
@@ -86,11 +90,11 @@ class EmpleadoController extends Controller
                 'dia' => $fecha->dayName,
                 'fecha' => $fecha->toDateString(),
             ];
-            //guardamos el registro falta guardar sin borrar checar si funciona push
+            //Recorremos registros para guardar hora-entrada hora-salida
             foreach($registros as $registro){
                 $hora = new Carbon($registro->hora);
-                
-              
+    
+                //verificamos los registros
                 if($hora->toDateString() == $fecha->toDateString()){
                     //dd($hora->dayOfWeek);
                     foreach($horarios as $horario){
@@ -104,12 +108,24 @@ class EmpleadoController extends Controller
                                 $reporte_faltas[$i]['hora_salida'] = $hora->toTimeString();
                             }
                         }
-                    }
-                    // 
-                   
-                }   
+                    }  
+                } 
             }
+            //verificamos justificantes
+             foreach($justificantes as $justificante){
+                $inicio = new Carbon($justificante->fecha_inicio);
+                $final = new Carbon($justificante->fecha_final);
+                //verificamos los registros
+                if($fecha->toDateString() >= $inicio->toDateString() &&  $fecha->toDateString() <= $final->toDateString()){
+                    foreach($horarios as $horario){
+                        if($fecha->dayOfWeek == $horario->dia_entrada){
+                            $reporte_faltas[$i]['hora_entrada'] = $horario->hora_entrada . ' ' . Incidencia::where('id', '=', $justificante->catalogo_de_incidencias_id)->first()->resultante;
+                        }
+                    }
+                } 
+            }   
             $i++;
+            // Incidencia::where('id', '=', $justificante->catalogo_de_incidencias_id)->first()->tipo
         }
         dd($reporte_faltas);
         /* $reportes_faltas = Empleado::join('periodos','empleados.id', '=', 'periodos.empleado_id')
