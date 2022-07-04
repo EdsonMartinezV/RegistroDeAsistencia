@@ -76,27 +76,44 @@ class EmpleadoController extends Controller
         ->orderBy('hora', 'asc')->get();
         
         //obtención de los dias de los periodos del empleado y catalogo horas de entrada/salida
-        $horario = Empleado::find($id)
+        $horarios = Empleado::find($id)
         ->join('periodos','empleados.id', '=', 'periodos.empleado_id')->where('periodos.empleado_id','=',$id)
         -> join('dias','periodos.id', '=', 'dias.periodo_id')
         -> join('catalogo_de_horarios','dias.catalogo_de_horarios_id', '=', 'catalogo_de_horarios.id')
         ->get(); 
 
+    
         $reporte_faltas = []; 
         $i = 0;
         //recorremos el intervalo de fechas
         foreach($fechas as $fecha){
             //guardamos el dia y fecha
-            $reporte_faltas[strval($i+1)] = [
+            $reporte_faltas[strval($i)] = [
                 'dia' => $fecha->dayName,
                 'fecha' => $fecha->toDateString(),
             ];
             //guardamos el registro falta guardar sin borrar checar si funciona push
             foreach($registros as $registro){
                 $hora = new Carbon($registro->hora);
+                
+              
                 if($hora->toDateString() == $fecha->toDateString()){
-                    $reporte_faltas[$i+1]['hora_entrada'] = $registro->hora;
-                }
+                    //dd($hora->dayOfWeek);
+                    foreach($horarios as $horario){
+                        if($hora->dayOfWeek == $horario->dia_entrada){
+                            if($hora->toTimeString()>=$horario->hora_inicio_checada_entrada && $hora->toTimeString()<=$horario->hora_fin_checada_entrada ){
+                                $reporte_faltas[$i]['hora_entrada'] = $hora->toTimeString();
+                            }
+                        }
+                        if($hora->dayOfWeek == $horario->dia_salida){
+                            if($hora->toTimeString()>=$horario->hora_inicio_checada_salida && $hora->toTimeString()<=$horario->hora_fin_checada_salida ){
+                                $reporte_faltas[$i]['hora_salida'] = $hora->toTimeString();
+                            }
+                        }
+                    }
+                    // 
+                   
+                }   
             }
             $i++;
         }
