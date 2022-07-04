@@ -90,8 +90,7 @@
                     </tr>
                 </tbody>
             </table>
-            @dump($registros)
-            @dump($registro)
+            @dump($cardex)
         </div>
     </main>
     @endsection

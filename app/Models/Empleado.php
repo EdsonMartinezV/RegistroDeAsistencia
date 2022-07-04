@@ -46,4 +46,8 @@ class Empleado extends Model
     public function faltas(){
         return $this->hasMany(Falta::class);
     }
+
+    /* public function incidencias(){
+        return $this->hasManyThrough(Incidencia::class, Justificante::class);
+    } */
 }

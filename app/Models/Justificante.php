@@ -10,7 +10,6 @@ class Justificante extends Model
     use HasFactory;
     public $timestamps = false;
     protected $fillable = [
-        'tipo',
         'fecha_inicio',
         'fecha_final',
         'horario',
@@ -19,7 +18,7 @@ class Justificante extends Model
         'catalogo_de_incidencias_id'
     ];
 
-    public function incidencias(){
+    public function incidencia(){
         return $this->belongsTo(Incidencia::class);
     }
 
