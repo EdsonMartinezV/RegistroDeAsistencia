@@ -7,7 +7,6 @@ use App\Models\Dia;
 use App\Models\Incidencia;
 use App\Models\Periodo;
 use App\Models\Registro;
-use App\Models\Incidencia;
 use DateTime;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -62,9 +61,6 @@ class EmpleadoController extends Controller
     }
 
     public function Faltas(Request $request, $id) {
-        // $Periodo = Empleado::find($id)->dias;
-     /*     $Periodo = Empleado::find(1)->periodos;
-        dd($Periodo); */
 
         //obtener un intervalo que se puede recorrer entre las fechas que se requiere
         $inicio = new Carbon($request->inicio);
@@ -105,9 +101,14 @@ class EmpleadoController extends Controller
                     //dd($hora->dayOfWeek);
                     foreach($horarios as $horario){
                         if($hora->dayOfWeek == $horario->dia_entrada){
+                            // $horario->dia_entrada = new Carbon($horario->hora_inicio_checada_entrada);
                             if($hora->toTimeString()>=$horario->hora_inicio_checada_entrada && $hora->toTimeString()<=$horario->hora_fin_checada_entrada ){
                                 $reporte_faltas[$i]['hora_entrada'] = $hora->toTimeString();
                             }
+                           /*  if($hora->toTimeString() < $horario->hora_inicio_checada_entrada || $hora->toTimeString() > $horario->hora_fin_checada_entrada){
+                                $reporte_faltas[$i]['hora_entrada'] = 'sin registro';
+                            } */
+    
                         }
                         if($hora->dayOfWeek == $horario->dia_salida){
                             if($hora->toTimeString()>=$horario->hora_inicio_checada_salida && $hora->toTimeString()<=$horario->hora_fin_checada_salida ){
@@ -127,22 +128,15 @@ class EmpleadoController extends Controller
                         if($fecha->dayOfWeek == $horario->dia_entrada){
                             $reporte_faltas[$i]['hora_entrada'] = $horario->hora_entrada . ' ' . Incidencia::where('id', '=', $justificante->catalogo_de_incidencias_id)->first()->resultante;
                         }
+                        if($fecha->dayOfWeek == $horario->dia_salida){
+                            $reporte_faltas[$i]['hora_salida'] = $horario->hora_salida . ' ' . Incidencia::where('id', '=', $justificante->catalogo_de_incidencias_id)->first()->resultante;
+                        }
                     }
                 } 
             }   
-            $i++;
-            // Incidencia::where('id', '=', $justificante->catalogo_de_incidencias_id)->first()->tipo
+            $i++;   
         }
         dd($reporte_faltas);
-        /* $reportes_faltas = Empleado::join('periodos','empleados.id', '=', 'periodos.empleado_id')
-        -> join('dias','periodos.id', '=', 'dias.periodo_id')
-        -> join('catalogo_de_horarios','dias.catalogo_de_horarios_id', '=', 'catalogo_de_horarios.id')
-        -> where ([['empleados.id','=',$id]])
-        ->get(); */
-
-        // $registros =Empleado::find($id)->registros;
-        
-        //recorremos el intervalo para ir guardando los datos del reporte de kardex
      
         return view('reporteFaltas', compact('fechas', 'horario', 'registros','id'));
     }
