@@ -25,7 +25,7 @@
     <!-- Left links -->
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       <li class="nav-item">
-        {{-- <a class="nav-link"  href="/registrar-cliente">Registrarse</a> --}}
+        <a class="nav-link"  href="/">Inicio</a>
     </ul>
     <!-- Left links -->
   <!-- Collapsible wrapper -->
@@ -33,12 +33,12 @@
   <!-- Right elements -->
   <div class="d-flex align-items-center">
     <!-- Icon -->
-    <a class="text-reset me-3" href="#">
+    {{-- <a class="text-reset me-3" href="#">
       <i class="fas fa-shopping-cart"></i>
-    </a>
+    </a> --}}
 
     <div class="col-4 text-right barra">
-      <ul class="navbar-nav mr-auto">
+      {{-- <ul class="navbar-nav mr-auto">
           <li>
                 <a href="#" class="px-3 text-light perfil dropdown-toggle" id="navbarDropdown" role="button"
                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
@@ -50,7 +50,7 @@
                   </a>
               </div>
           </li>
-      </ul>
+      </ul> --}}
   </div>
 
       </ul>

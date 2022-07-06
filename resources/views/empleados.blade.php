@@ -17,6 +17,7 @@
                         <th scope="col">Nombre</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,6 +26,7 @@
                             <td>{{ $empleado->nombre }}</td>
                             <td><a href="{{ route('cardex', $empleado->id) }}">Cardex</a></td>
                             <td><a href="{{ route('faltas', $empleado->id) }}">Reporte de Faltas</a></td>
+                            <td><a href="{{ route('crearIncidencia', $empleado->id) }}">Agregar justificante</a></td>
                         </tr>
                         <br>
                     @endforeach

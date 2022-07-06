@@ -38,3 +38,6 @@ Route::get('/obtener-faltas/{id}', [EmpleadoController::class, 'faltas'])->name(
 
 Route::get('/cardex/{empleadoId}', [EmpleadoController::class, 'mostrarCardex'])->name('cardex');
 
+Route::get('/justificantes/crear/{empleadoId}', [EmpleadoController::class, 'crearIncidencia'])->name('crearIncidencia');
+
+Route::post('/incidencias/guardar', [EmpleadoController::class, 'guardarIncidencia'])->name('guardarIncidencia');

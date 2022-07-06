@@ -6,6 +6,7 @@ use App\Models\Clues;
 use App\Models\Empleado;
 use App\Models\Dia;
 use App\Models\Incidencia;
+use App\Models\Justificante;
 use App\Models\Periodo;
 use App\Models\Registro;
 use DateTime;
@@ -53,6 +54,18 @@ class EmpleadoController extends Controller
 
     public function guardarEmpleado(Request $request){
         Empleado::create(
+            $request->all()
+        );
+        return redirect()->route('empleados');
+    }
+
+    public function crearIncidencia($empleadoId){
+        $incidencias = Incidencia::all();
+        return view('crearIncidencia', compact('empleadoId', 'incidencias'));
+    }
+
+    public function guardarIncidencia(Request $request){
+        Justificante::create(
             $request->all()
         );
         return redirect()->route('empleados');
