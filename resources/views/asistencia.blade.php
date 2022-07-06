@@ -23,11 +23,22 @@
                   <div class="row">
                     <div class="col-md-6 mb-4">
                       <div class="form-outline">
-                        <label class="form-label" for="empleado_id">Id del empleado</label>
-                        <input type="text" id="empleado_id" class="form-control form-control-lg" name="empleado_id"/>
+                        <label class="form-label" for="empleado_id">Empleado</label>
+                        <select type="text" id="empleado_id" class="form-control form-control-lg" name="empleado_id">
+                          <option value="">Seleccione una opcion</option>
+                          @foreach ($empleados as $empleado)
+                            <option value="{{ $empleado->id }}">{{ $empleado->nombre }}</option>
+                          @endforeach
+                        </select>
                         @error('empleado_id')
-                        <br><small>{{ $message }}</small>
+                          <br><small>{{ $message }}</small>
                         @enderror
+                      </div>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                      <div class="form-outline">
+                        <label class="form-label" for="hora">Hora</label>
+                        <input type="datetime-local" id="hora" class="form-control form-control-lg" name="hora"/>
                       </div>
                     </div>
                   </div>

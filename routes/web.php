@@ -3,6 +3,7 @@
 use App\Http\Controllers\EmpleadoController;
 use App\Http\Controllers\RegistroController;
 use App\Http\Controllers\FaltasController;
+use App\Models\Empleado;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('asistencia');
+    $empleados = Empleado::all();
+    return view('asistencia', compact('empleados'));
 })->name('formularioAsistencia');
 
 Route::get('reporteFaltas/{id}', function($id) {
