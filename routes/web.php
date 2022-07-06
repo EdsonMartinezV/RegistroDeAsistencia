@@ -23,7 +23,7 @@ Route::get('/', function () {
 })->name('formularioAsistencia');
 
 Route::get('reporteFaltas/{id}', function($id) {
-    return view('reporteFaltas',compact('id'));
+    return view('reporteFaltas', compact('id'));
 })->name('faltas');
 
 Route::post('/validar-asistencia', [RegistroController::class, 'validarAsistencia'])->name('validarAsistencia');
@@ -36,7 +36,7 @@ Route::get('/empleados/crear', [EmpleadoController::class, 'crearEmpleado'])->na
 
 Route::post('/empleados/guardar', [EmpleadoController::class, 'guardarEmpleado'])->name('guardarEmpleado');
 
-Route::get('/obtener-faltas/{id}', [EmpleadoController::class, 'faltas'])->name('obtenerFaltas');
+Route::get('/obtener-faltas/{empleadoId}', [EmpleadoController::class, 'faltas'])->name('obtenerFaltas');
 
 Route::get('/cardex/{empleadoId}', [EmpleadoController::class, 'mostrarCardex'])->name('cardex');
 

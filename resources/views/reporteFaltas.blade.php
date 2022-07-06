@@ -39,7 +39,7 @@
                         <div class="form-group">
                             <h6>Fecha Termino</h6>
                            <div class='input-group date' id='datetimepicker2'>
-                              <input type='text' class="form-control" name="Termino"/>
+                              <input type='text' class="form-control" name="termino"/>
                               <span class="input-group-addon">
                               <span class="glyphicon glyphicon-calendar"></span>
                               </span>

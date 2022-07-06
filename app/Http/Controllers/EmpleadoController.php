@@ -86,31 +86,37 @@ class EmpleadoController extends Controller
         return view('cardex', compact('cardex'));
     }
 
-    public function Faltas(Request $request, $id) {
+    public function faltas2(Request $request, $empleadoId){
+        $empleado = Empleado::find($empleadoId);
+        $registros = $empleado->registros()->where()->orderBy('fecha', 'asc')->get();
+        
+    }
+
+    public function Faltas(Request $request, $empleadoId) {
 
         //obtener un intervalo que se puede recorrer entre las fechas que se requiere
         $inicio = new Carbon($request->inicio);
-        $final = new Carbon($request->Termino);
+        $final = new Carbon($request->termino);
         $intervalo = DateInterval::createFromDateString('1 day');
         $fechas = new DatePeriod($inicio, $intervalo, $final);
 
         //obtencion de los registros entre las fechas que se requieren
-        $registros = Empleado::find($id)
+        $registros = Empleado::find($empleadoId)
             ->registros()
-            ->whereBetween('hora', [$request->inicio, $request->Termino])
+            ->whereBetween('hora', [$request->inicio, $request->termino])
             ->orderBy('hora', 'asc')
             ->get();
         
         //obtención de los dias de los periodos del empleado y catalogo horas de entrada/salida
-        $horarios = Empleado::find($id)
+        $horarios = Empleado::find($empleadoId)
             ->join('periodos','empleados.id', '=', 'periodos.empleado_id')
-            ->where('periodos.empleado_id','=',$id)
+            ->where('periodos.empleado_id','=',$empleadoId)
             ->join('dias','periodos.id', '=', 'dias.periodo_id')
             ->join('catalogo_de_horarios','dias.catalogo_de_horarios_id', '=', 'catalogo_de_horarios.id')
             ->get(); 
 
         //obtención de los justificantes
-        $justificantes = Empleado::find($id)->justificantes()->orderBy('fecha_inicio', 'asc')->get();
+        $justificantes = Empleado::find($empleadoId)->justificantes()->orderBy('fecha_inicio', 'asc')->get();
 
 
         $reporte_tdfaltas = []; 
