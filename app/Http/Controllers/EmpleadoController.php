@@ -100,7 +100,7 @@ class EmpleadoController extends Controller
         $justificantes = Empleado::find($id)->justificantes()->orderBy('fecha_inicio', 'asc')->get();
 
 
-        $reporte_faltas = []; 
+        $reporte_tdfaltas = []; 
         $i = 0;
         //recorremos el intervalo de fechas
         foreach($fechas as $fecha){// Validar periodo activo dentro de la fecha a evaluar
@@ -116,23 +116,36 @@ class EmpleadoController extends Controller
                 //verificamos los registros
                 if($hora->toDateString() == $fecha->toDateString()){
                     //dd($hora->dayOfWeek);
+                    $j=0;
                     foreach($horarios as $horario){
                         if($hora->dayOfWeek == $horario->dia_entrada){
-                            // $horario->dia_entrada = new Carbon($horario->hora_inicio_checada_entrada);
-                            if($hora->toTimeString()>=$horario->hora_inicio_checada_entrada && $hora->toTimeString()<=$horario->hora_fin_checada_entrada ){
-                                $reporte_faltas[$i]['hora_entrada'] = $hora->toTimeString();
+                            $hora_inicio_checada_entrada = new Carbon($horario->hora_inicio_checada_entrada);
+                            $hora_fin_checada_entrada = new Carbon($horario->hora_fin_checada_entrada);
+                            // $hora_inicio_checada_entrada = Carbon::createFromFormat('Y-m-d H:i:s', $hora_inicio_checada_entrada)->format('H:i:s');
+                            $hora_registro= new Carbon($hora->toTimeString());
+                
+                            
+                            // dd($horarios->count());
+                            // dd($hora_registro->gte($hora_inicio_checada_entrada) and $hora_registro->lte($hora_fin_checada_entrada));
+                            if($hora_registro->gte($hora_inicio_checada_entrada) and $hora_registro->lte($hora_fin_checada_entrada) ){
+                                $reporte_faltas[$j]['hora_entrada'] = $hora->toTimeString();
+                            }
+                            //sin la negación deberia funcionar pero no funciona
+                            else if(!$hora_registro->gt($hora_fin_checada_entrada) ){
+                                $reporte_faltas[$j]['hora_entrada'] = 'sin registro';
                             }
                            /*  if($hora->toTimeString() < $horario->hora_inicio_checada_entrada || $hora->toTimeString() > $horario->hora_fin_checada_entrada){
                                 $reporte_faltas[$i]['hora_entrada'] = 'sin registro';
                             } */
     
-                        }// Verificar con dia de salida distinto a dia de entrada
+                        }$j++;
                         if($hora->dayOfWeek == $horario->dia_salida){
                             if($hora->toTimeString()>=$horario->hora_inicio_checada_salida && $hora->toTimeString()<=$horario->hora_fin_checada_salida ){
                                 $reporte_faltas[$i]['hora_salida'] = $hora->toTimeString();
                             }
                         }
-                    }  
+                    }
+                    // dd($j);  
                 } 
             }
             //verificamos justificantes
@@ -140,7 +153,7 @@ class EmpleadoController extends Controller
                 $inicio = new Carbon($justificante->fecha_inicio);
                 $final = new Carbon($justificante->fecha_final);
                 //verificamos los registros
-                if($fecha->toDateString() >= $inicio->toDateString() &&  $fecha->toDateString() <= $final->toDateString()){
+                if($fecha->toDateString() >= $inicio->toDateString() and  $fecha->toDateString() <= $final->toDateString()){
                     foreach($horarios as $horario){
                         if($fecha->dayOfWeek == $horario->dia_entrada){
                             $reporte_faltas[$i]['hora_entrada'] = $horario->hora_entrada . ' ' . Incidencia::where('id', '=', $justificante->catalogo_de_incidencias_id)->first()->resultante;
