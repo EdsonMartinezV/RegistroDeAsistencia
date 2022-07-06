@@ -86,7 +86,7 @@ class EmpleadoController extends Controller
         $reporte_tdfaltas = []; 
         $i = 0;
         //recorremos el intervalo de fechas
-        foreach($fechas as $fecha){
+        foreach($fechas as $fecha){// Validar periodo activo dentro de la fecha a evaluar
             //guardamos el dia y fecha
             $reporte_faltas[strval($i)] = [
                 'dia' => $fecha->dayName,
@@ -132,7 +132,7 @@ class EmpleadoController extends Controller
                 } 
             }
             //verificamos justificantes
-             foreach($justificantes as $justificante){
+             foreach($justificantes as $justificante){// Pasar foreach's a funciones que retornen el resultado
                 $inicio = new Carbon($justificante->fecha_inicio);
                 $final = new Carbon($justificante->fecha_final);
                 //verificamos los registros
@@ -140,7 +140,7 @@ class EmpleadoController extends Controller
                     foreach($horarios as $horario){
                         if($fecha->dayOfWeek == $horario->dia_entrada){
                             $reporte_faltas[$i]['hora_entrada'] = $horario->hora_entrada . ' ' . Incidencia::where('id', '=', $justificante->catalogo_de_incidencias_id)->first()->resultante;
-                        }
+                        }// Usar diferencia numerica de dias
                         if($fecha->dayOfWeek == $horario->dia_salida){
                             $reporte_faltas[$i]['hora_salida'] = $horario->hora_salida . ' ' . Incidencia::where('id', '=', $justificante->catalogo_de_incidencias_id)->first()->resultante;
                         }

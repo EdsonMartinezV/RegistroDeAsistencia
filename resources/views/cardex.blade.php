@@ -54,8 +54,8 @@
                 </thead>
                 <tbody class="table table-striped">
                     @foreach ($cardex as $anio)
-                        <tr>
-                            @foreach ($anio as $mes)
+                        @foreach ($anio as $mes)
+                            <tr>
                                 <th>{{ $mes['anio'] }}</th>
                                 <th>{{ $mes['mes'] }}</th>
                                 @for ($i = 1; $i <= 31; $i++)
@@ -65,8 +65,8 @@
                                         <th></th>
                                     @endif
                                 @endfor
-                            @endforeach
-                        </tr>
+                            </tr>
+                        @endforeach
                     @endforeach
                 </tbody>
             </table>
