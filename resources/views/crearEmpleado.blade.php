@@ -16,32 +16,45 @@
               <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                 <div class="card-body p-2 p-md-5">
                 <div class="text-center mb-3 pb-2 mt-3">
-                    <h4 style="color: #495057 ;">Formulario de empleado</h4>
+                    <h4 style="color: #495057 ;">Registrar nuevo Empleado</h4>
                 </div>
-                <form class="mb-0">
-        
+                <form class="mb-0" action="{{ route('guardarEmpleado') }}" method="POST">
+                    @csrf
                     <div class="row mb-4">
                     <div class="col">
                         <div class="form-outline">
-                        <label class="form-label" for="form9Example1">Nombre</label>
-                        <input type="text" id="form9Example1" class="form-control input-custom" />
+                        <label class="form-label" for="nombre">Nombre</label>
+                        <input type="text" id="nombre" name="nombre" class="form-control input-custom" />
                         </div>
                     </div>
                     <div class="col">
                         <div class="form-outline">
-                        <label class="form-label" for="form9Example2">Tipo de trabajador</label>
-                        <input type="text" id="form9Example2" class="form-control input-custom" />
+                        <label class="form-label" for="tipo_trabajador">Tipo de trabajador</label>
+                        <select type="text" id="tipo_trabajador" name="tipo_trabajador" class="form-control input-custom">
+                            <option value="">Seleccione una opción</option>
+                            <option value="medico">medico</option>
+                            <option value="administrativo">administrativo</option>
+                        </select>
                         </div>
                     </div>
                     </div>
                     <div class="row mb-4">
                     <div class="form-outline mb-4">
-                        <label class="form-label" for="form4Example3">RFC</label>
-                        <input type="text" id="form9Example3" class="form-control input-custom" />
+                        <label class="form-label" for="rfc">RFC</label>
+                        <input type="text" id="rfc" name="rfc" class="form-control input-custom" />
                     </div>
                     <div class="form-outline mb-4">
-                        <label class="form-label" for="form4Example4">CURP</label>
-                        <input type="text" id="form9Example4" class="form-control input-custom" />
+                        <label class="form-label" for="curp">CURP</label>
+                        <input type="text" id="curp" name="curp" class="form-control input-custom" />
+                    </div>
+                    <div class="form-outline mb-4">
+                        <label class="form-label" for="catalogo_de_clues_id">CLUES</label>
+                        <select type="text" id="catalogo_de_clues_id" name="catalogo_de_clues_id" class="form-control input-custom">
+                            <option value="">Seleccione una opción</option>
+                            @foreach($clues as $clue)
+                                <option value="{{ $clue->id }}">{{ $clue->nombre_entidad }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="float-end ">
                     <!-- Submit button -->

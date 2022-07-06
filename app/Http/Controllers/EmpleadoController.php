@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Clues;
 use App\Models\Empleado;
 use App\Models\Dia;
 use App\Models\Incidencia;
@@ -45,6 +46,18 @@ class EmpleadoController extends Controller
         return view('empleados', compact('empleados'));
     }
 
+    public function crearEmpleado(){
+        $clues = Clues::all();
+        return view('crearEmpleado', compact('clues'));
+    }
+
+    public function guardarEmpleado(Request $request){
+        Empleado::create(
+            $request->all()
+        );
+        return redirect()->route('empleados');
+    }
+
     public function mostrarCardex($empleadoId) {
         date_default_timezone_set("America/Mexico_City");
         $justificantes = Empleado::find($empleadoId)->justificantes()->orderBy('fecha_inicio', 'asc')->get();
@@ -69,15 +82,19 @@ class EmpleadoController extends Controller
         $fechas = new DatePeriod($inicio, $intervalo, $final);
 
         //obtencion de los registros entre las fechas que se requieren
-        $registros = Empleado::find($id)->registros()->whereBetween('hora', [$request->inicio, $request->Termino])
-        ->orderBy('hora', 'asc')->get();
+        $registros = Empleado::find($id)
+            ->registros()
+            ->whereBetween('hora', [$request->inicio, $request->Termino])
+            ->orderBy('hora', 'asc')
+            ->get();
         
         //obtención de los dias de los periodos del empleado y catalogo horas de entrada/salida
         $horarios = Empleado::find($id)
-        ->join('periodos','empleados.id', '=', 'periodos.empleado_id')->where('periodos.empleado_id','=',$id)
-        -> join('dias','periodos.id', '=', 'dias.periodo_id')
-        -> join('catalogo_de_horarios','dias.catalogo_de_horarios_id', '=', 'catalogo_de_horarios.id')
-        ->get(); 
+            ->join('periodos','empleados.id', '=', 'periodos.empleado_id')
+            ->where('periodos.empleado_id','=',$id)
+            ->join('dias','periodos.id', '=', 'dias.periodo_id')
+            ->join('catalogo_de_horarios','dias.catalogo_de_horarios_id', '=', 'catalogo_de_horarios.id')
+            ->get(); 
 
         //obtención de los justificantes
         $justificantes = Empleado::find($id)->justificantes()->orderBy('fecha_inicio', 'asc')->get();

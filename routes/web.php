@@ -30,6 +30,10 @@ Route::post('/validar-asistencia', [RegistroController::class, 'validarAsistenci
 
 Route::get('/empleados', [EmpleadoController::class, 'mostrarEmpleados'])->name('empleados');
 
+Route::get('/empleados/crear', [EmpleadoController::class, 'crearEmpleado'])->name('crearEmpleado');
+
+Route::post('/empleados/guardar', [EmpleadoController::class, 'guardarEmpleado'])->name('guardarEmpleado');
+
 Route::get('/obtener-faltas/{id}', [EmpleadoController::class, 'faltas'])->name('obtenerFaltas');
 
 Route::get('/cardex/{empleadoId}', [EmpleadoController::class, 'mostrarCardex'])->name('cardex');
