@@ -100,33 +100,41 @@ class EmpleadoController extends Controller
                 if($hora->toDateString() == $fecha->toDateString()){
                     //dd($hora->dayOfWeek);
                     $j=0;
+                  
                     foreach($horarios as $horario){
                         if($hora->dayOfWeek == $horario->dia_entrada){
                             $hora_inicio_checada_entrada = new Carbon($horario->hora_inicio_checada_entrada);
                             $hora_fin_checada_entrada = new Carbon($horario->hora_fin_checada_entrada);
+                            $hora_inicio_checada_salida = new Carbon($horario->hora_inicio_checada_salida);
+                            $hora_fin_checada_salida = new Carbon($horario->hora_fin_checada_salida);
                             // $hora_inicio_checada_entrada = Carbon::createFromFormat('Y-m-d H:i:s', $hora_inicio_checada_entrada)->format('H:i:s');
                             $hora_registro= new Carbon($hora->toTimeString());
                 
-                            
-                            // dd($horarios->count());
                             // dd($hora_registro->gte($hora_inicio_checada_entrada) and $hora_registro->lte($hora_fin_checada_entrada));
-                            if($hora_registro->gte($hora_inicio_checada_entrada) and $hora_registro->lte($hora_fin_checada_entrada) ){
-                                $reporte_faltas[$j]['hora_entrada'] = $hora->toTimeString();
-                            }
-                            //sin la negación deberia funcionar pero no funciona
-                            else if(!$hora_registro->gt($hora_fin_checada_entrada) ){
-                                $reporte_faltas[$j]['hora_entrada'] = 'sin registro';
-                            }
-                           /*  if($hora->toTimeString() < $horario->hora_inicio_checada_entrada || $hora->toTimeString() > $horario->hora_fin_checada_entrada){
-                                $reporte_faltas[$i]['hora_entrada'] = 'sin registro';
-                            } */
-    
-                        }$j++;
-                        if($hora->dayOfWeek == $horario->dia_salida){
-                            if($hora->toTimeString()>=$horario->hora_inicio_checada_salida && $hora->toTimeString()<=$horario->hora_fin_checada_salida ){
-                                $reporte_faltas[$i]['hora_salida'] = $hora->toTimeString();
-                            }
+                            if(empty($reporte_faltas[$j]['hora_entrada'])){
+                                if($hora_registro->gte($hora_inicio_checada_entrada) and $hora_registro->lte($hora_fin_checada_entrada) ){
+                                    $reporte_faltas[$j]['hora_entrada'] = $hora->toTimeString();
+                                }
                         }
+                       
+                            if(empty($reporte_faltas[$j]['hora_salida'])){
+                                if($hora->dayOfWeek == $horario->dia_salida){
+                                    if($hora_registro->gte($hora_inicio_checada_salida) and $hora_registro->lte($hora_fin_checada_salida) ){
+                                        $reporte_faltas[$i]['hora_salida'] = $hora->toTimeString();
+                                    }
+                                }
+                            }
+                    }
+                    if($hora->dayOfWeek != $horario->dia_entrada){
+                        if(empty($reporte_faltas[$j]['hora_salida'])){
+                            $reporte_faltas[$j]['hora_salida'] = 'sin registro';
+                        }
+                        if(empty($reporte_faltas[$j]['hora_entrada'])){
+                            $reporte_faltas[$j]['hora_entrada'] = 'sin registro';
+                        }
+                    }
+                    
+                        $j++;
                     }
                     // dd($j);  
                 } 
