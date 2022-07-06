@@ -11,7 +11,7 @@
     <main style="margin-top: 58px">
         <div class="vh-100 gradient-custom">
             <h1>Empleados</h1>
-            <table>
+            <table class="table table-striped">
                 <thead>
                     <tr>
                         <th scope="col">Nombre</th>
@@ -30,6 +30,7 @@
                     @endforeach
                 </tbody>
             </table>
+            <a href="{{ route('crearEmpleado') }}">Registrar nuevo empleado</a>
         </div>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
