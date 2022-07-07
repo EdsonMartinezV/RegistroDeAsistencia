@@ -12,8 +12,11 @@ use App\Models\Registro;
 use DateTime;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Carbon\CarbonInterval;
+use Carbon\CarbonPeriod;
 use DatePeriod;
 use DateInterval;
+use Illuminate\Database\Eloquent\Builder;
 
 class EmpleadoController extends Controller
 {
@@ -88,8 +91,73 @@ class EmpleadoController extends Controller
 
     public function faltas2(Request $request, $empleadoId){
         $empleado = Empleado::find($empleadoId);
-        $registros = $empleado->registros()->where()->orderBy('fecha', 'asc')->get();
-        
+        $inicio = new Carbon($request->inicio);
+        $termino = new Carbon($request->termino);
+        $intervalo = CarbonInterval::createFromDateString('1 day');
+        $fechas = new CarbonPeriod($inicio, $intervalo, $termino);
+
+        $registros = $empleado->registros()
+            ->whereBetween('hora', [$inicio, $termino])
+            ->orderBy('hora', 'asc')
+            ->get();
+
+        $periodos = $empleado->periodos()
+            ->where(function (Builder $query) use ($inicio, $termino) {
+                $query->whereBetween('inicio_periodo_laboral', [$inicio, $termino])
+                    ->orWhereBetween('fin_periodo_laboral', [$inicio, $termino])
+                    ->orWhere(function (Builder $query) use ($inicio, $termino) {
+                        $query->where('inicio_periodo_laboral', '<', $inicio)
+                            ->where('fin_periodo_laboral', '>', $termino);
+                        });
+            })->get();
+
+        $faltas = [];
+        $i = 0;
+        foreach($fechas as $fecha) {
+            $faltas[$i]  = [
+                'dia' => $this->dias[$fecha->dayName],
+                'fecha' => $fecha->toDateString(),
+            ];
+            foreach($registros as $registro) {
+                $carbonHora = new Carbon($registro->hora);
+                foreach ($periodos as $periodo) {
+                    if($carbonHora->betweenIncluded($periodo->inicio_periodo_laboral, $periodo->fin_periodo_laboral)) {
+                        foreach ($periodo->horarios as $horario) {
+                            if($carbonHora->dayOfWeek == $horario->pivot->dia_entrada){
+                                $carbonInicio_checada_entrada = new Carbon($horario->hora_inicio_checada_entrada);
+                                $carbonFin_checada_entrada = new Carbon($horario->hora_fin_checada_entrada);
+                                $carbonInicio_checada_salida = new Carbon($horario->hora_inicio_checada_salida);
+                                $carbonFin_checada_salida = new Carbon($horario->hora_fin_checada_salida);
+                                $carbonTimeHora = new Carbon($carbonHora->toTimeString());
+                                //dd($carbonInicio_checada_entrada);
+                                if(empty($faltas[$i]['hora_entrada'])){
+                                    if($carbonTimeHora->gte($carbonInicio_checada_entrada) and $carbonTimeHora->lte($carbonFin_checada_entrada) ){
+                                        $faltas[$i]['hora_entrada'] = $carbonTimeHora->toTimeString();
+                                    }
+                                }
+                                if(empty($faltas[$i]['hora_salida'])){
+                                    if($carbonHora->dayOfWeek == $horario->dia_salida){
+                                        if($carbonTimeHora->gte($carbonInicio_checada_salida) and $carbonTimeHora->lte($carbonFin_checada_salida) ){
+                                            $faltas[$i]['hora_salida'] = $carbonTimeHora->toTimeString();
+                                        }
+                                    }
+                                }
+                            }
+                            if($carbonHora->dayOfWeek != $horario->dia_entrada){
+                                if(empty($faltas[$i]['hora_salida'])){
+                                    $reporte_faltas[$i]['hora_salida'] = 'sin registro';
+                                }
+                                if(empty($reporte_faltas[$i]['hora_entrada'])){
+                                    $reporte_faltas[$i]['hora_entrada'] = 'sin registro';
+                                }
+                            }
+                            $i++;
+                        }
+                    }
+                }
+            }
+        }
+        dd($faltas);
     }
 
     public function Faltas(Request $request, $empleadoId) {

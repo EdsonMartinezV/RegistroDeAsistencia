@@ -21,7 +21,7 @@ class Horario extends Model
     ];
 
     public function periodos(){
-        return $this->belongsToMany(Periodo::class, 'dias', $relatedPivotKey = 'catalogo_de_horarios_id')
+        return $this->belongsToMany(Periodo::class, 'dias', 'catalogo_de_horarios_id', 'periodos_id')
             ->withPivot('dia_entrada', 'dia_salida');
     }
 }

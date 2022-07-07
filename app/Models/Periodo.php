@@ -21,8 +21,7 @@ class Periodo extends Model
     }
 
     public function horarios(){
-        return $this->belongsToMany(Horario::class, 'dias', 'catalogo_de_horarios_id')
+        return $this->belongsToMany(Horario::class, 'dias', 'periodo_id' , 'catalogo_de_horarios_id')
             ->withPivot('dia_entrada', 'dia_salida');
     }
-
 }
