@@ -279,7 +279,6 @@ class EmpleadoController extends Controller
             }   
             $i++;   
         }
-        dd($reporte_faltas);
      
         return view('reporteFaltas', compact('fechas', 'horario', 'registros','id'));
     }
