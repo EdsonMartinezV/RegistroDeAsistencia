@@ -146,35 +146,18 @@ class EmpleadoController extends Controller
                                         }
                                     }
                                 }
-                                /* if($carbonHora->dayOfWeek != $horario->pivot->dia_entrada){
-                                    if(empty($faltas[$i]['hora_salida'])){
-                                        $reporte_faltas[$i]['hora_salida'] = 'sin registro';
-                                    }
-                                    if(empty($reporte_faltas[$i]['hora_entrada'])){
-                                        $reporte_faltas[$i]['hora_entrada'] = 'sin registro';
-                                    }
-                                } */
                             }
                         }
                     }
-                    // dd('hora '.$carbonHora, 'fecha '.$fecha->toDateString());
                 }
-                }
-                if(empty($faltas[$i]['hora_entrada'])){
-                    $faltas[$i]['hora_entrada'] = 'sin registro';
-                }
-                if(empty($faltas[$i]['hora_salida'])){
-                    $faltas[$i]['hora_salida'] = 'sin registro';
-                }
-                /* if (!$carbonHora->isSameDay($fecha)) {
-                    if(empty($faltas[$i]['hora_entrada'])){
-                    $faltas[$i]['dia1'] = $carbonHora->toDateTimeString();
-                    $faltas[$i]['dia2'] = $fecha->toDateTimeString();
-                    }if(empty($faltas[$i]['hora_salida'])){
-                    $faltas[$i]['hora_salida'] = 'sin registro';
-                    }
-                    } */
-                $i++;
+            }
+            if(empty($faltas[$i]['hora_entrada'])){
+                $faltas[$i]['hora_entrada'] = 'sin registro';
+            }
+            if(empty($faltas[$i]['hora_salida'])){
+                $faltas[$i]['hora_salida'] = 'sin registro';
+            }
+            $i++;
         }
         dd($faltas);
     }
