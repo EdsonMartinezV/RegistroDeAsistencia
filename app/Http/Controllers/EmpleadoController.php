@@ -133,7 +133,6 @@ class EmpleadoController extends Controller
                                     $carbonTimeHoraEsteSi = new Carbon($carbonTimeHora);
 
                                     if(empty($faltas[$i]['hora_entrada'])){
-                                        // ($carbonTimeHoraEsteSi->gte($carbonInicio_checada_entrada) and $carbonTimeHoraEsteSi->lte($carbonFin_checada_entrada)) ? $faltas[$i]['hora_entrada'] =  $carbonTimeHora->toTimeString() : $faltas[$i]['hora_entrada'] =  'sin registro';
                                         if($carbonTimeHoraEsteSi->gte($carbonInicio_checada_entrada) and $carbonTimeHoraEsteSi->lte($carbonFin_checada_entrada)){
                                             $faltas[$i]['hora_entrada'] =  $carbonTimeHora->toTimeString();
                                         }
@@ -151,11 +150,22 @@ class EmpleadoController extends Controller
                     }
                 }
             }
-            if(empty($faltas[$i]['hora_entrada'])){
-                $faltas[$i]['hora_entrada'] = 'sin registro';
-            }
-            if(empty($faltas[$i]['hora_salida'])){
-                $faltas[$i]['hora_salida'] = 'sin registro';
+            if(empty($faltas[$i]['hora_entrada']) || empty($faltas[$i]['hora_salida'])){
+                if(!Justificante::where('empleado_id', '=', $empleadoId)->where('fecha_inicio', '=', $fecha->toDateString())->exists()){
+                    Justificante::create([
+                        'fecha_inicio' => $fecha->toDateString(),
+                        'horario' => 'Matutino',
+                        'num_memorandum' => random_int(1, 1000),
+                        'empleado_id' => $empleadoId,
+                        'catalogo_de_incidencias_id' => 1,
+                    ]);
+                }
+                if(empty($faltas[$i]['hora_entrada'])){
+                    $faltas[$i]['hora_entrada'] = 'sin registro';
+                }
+                if(empty($faltas[$i]['hora_salida'])){
+                    $faltas[$i]['hora_salida'] = 'sin registro';
+                }
             }
             $i++;
         }
