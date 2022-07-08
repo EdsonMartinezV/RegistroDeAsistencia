@@ -36,7 +36,7 @@ Route::get('/empleados/crear', [EmpleadoController::class, 'crearEmpleado'])->na
 
 Route::post('/empleados/guardar', [EmpleadoController::class, 'guardarEmpleado'])->name('guardarEmpleado');
 
-Route::get('/obtener-faltas/{empleadoId}', [EmpleadoController::class, 'faltas2'])->name('obtenerFaltas');
+Route::get('/obtener-faltas/{empleadoId}', [EmpleadoController::class, 'reporteFaltas'])->name('obtenerFaltas');
 
 Route::get('/cardex/{empleadoId}', [EmpleadoController::class, 'mostrarCardex'])->name('cardex');
 

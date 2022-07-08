@@ -17,6 +17,7 @@ use Carbon\CarbonPeriod;
 use DatePeriod;
 use DateInterval;
 use Illuminate\Database\Eloquent\Builder;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class EmpleadoController extends Controller
 {
@@ -78,6 +79,13 @@ class EmpleadoController extends Controller
         date_default_timezone_set("America/Mexico_City");
         $justificantes = Empleado::find($empleadoId)->justificantes()->orderBy('fecha_inicio', 'asc')->get();
         $cardex = [];
+        // dd($justificantes);
+        $empleado = Empleado::find($empleadoId);
+        /* $inicio = new Carbon($justificantes->first()->fecha_inicio);
+        $termino = new Carbon($justificantes->last()->fecha_inicio); */
+        $inicio = new Carbon('first day of January' . Carbon::now()->year);
+        $termino = new Carbon('last day of December' . Carbon::now()->year);
+        $this->obtenerFaltas($empleado, $inicio, $termino, false);
 
         foreach($justificantes as $justificante) {
             $fecha = new Carbon($justificante->fecha_inicio);
@@ -89,10 +97,16 @@ class EmpleadoController extends Controller
         return view('cardex', compact('cardex'));
     }
 
-    public function faltas2(Request $request, $empleadoId){
+    public function reporteFaltas(Request $request, $empleadoId){
         $empleado = Empleado::find($empleadoId);
         $inicio = new Carbon($request->inicio);
         $termino = new Carbon($request->termino);
+        $faltas = $this->obtenerFaltas($empleado, $inicio, $termino, true);
+        // dd($faltas);
+        return view ('reporteFaltas', compact('faltas', 'empleadoId'));
+    }
+
+    public function obtenerFaltas($empleado, $inicio, $termino, $enviarReporte){
         $intervalo = CarbonInterval::createFromDateString('1 day');
         $fechas = new CarbonPeriod($inicio, $intervalo, $termino);
 
@@ -119,7 +133,9 @@ class EmpleadoController extends Controller
                 'fecha' => $fecha->toDateString(),
             ];
             foreach($registros as $registro) {
+                // dd($registros);
                 $carbonHora = new Carbon($registro->hora);
+                // dd($carbonHora->toDateString() == $fecha->toDateString());
                 if ($carbonHora->toDateString() == $fecha->toDateString()) {
                     foreach ($periodos as $periodo) {
                         if($carbonHora->betweenIncluded($periodo->inicio_periodo_laboral, $periodo->fin_periodo_laboral)) {
@@ -150,11 +166,11 @@ class EmpleadoController extends Controller
                     }
                 }
             }
-            if(Justificante::where('empleado_id', '=', $empleadoId)->where('fecha_inicio', '=', $fecha->toDateString())->exists()){
+            if(Justificante::where('empleado_id', '=', $empleado->id)->where('fecha_inicio', '=', $fecha->toDateString())->exists()){
                 
             }
             if(empty($faltas[$i]['hora_entrada']) || empty($faltas[$i]['hora_salida'])){
-                if(!Justificante::where('empleado_id', '=', $empleadoId)
+                if(!Justificante::where('empleado_id', '=', $empleado->id)
                         ->where('fecha_inicio', '=', $fecha->toDateString())
                         ->where('catalogo_de_incidencias_id', '=', 1)
                         ->exists()){
@@ -162,7 +178,7 @@ class EmpleadoController extends Controller
                         'fecha_inicio' => $fecha->toDateString(),
                         'horario' => 'Matutino',
                         'num_memorandum' => random_int(1, 1000),
-                        'empleado_id' => $empleadoId,
+                        'empleado_id' => $empleado->id,
                         'catalogo_de_incidencias_id' => 1,
                     ]);
                 }
@@ -175,10 +191,12 @@ class EmpleadoController extends Controller
             }
             $i++;
         }
-        return view ('reporteFaltas', compact('faltas', 'empleadoId'));
+        if($enviarReporte){
+            return $faltas;
+        }
     }
 
-    public function Faltas(Request $request, $empleadoId) {
+    /* public function Faltas(Request $request, $empleadoId) {
 
         //obtener un intervalo que se puede recorrer entre las fechas que se requiere
         $inicio = new Carbon($request->inicio);
@@ -282,5 +300,5 @@ class EmpleadoController extends Controller
         dd($reporte_faltas);
      
         return view('reporteFaltas', compact('fechas', 'horario', 'registros','id'));
-    }
+    } */
 }

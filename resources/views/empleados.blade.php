@@ -9,31 +9,29 @@
 </head>
 <body>
     <main style="margin-top: 58px">
-        <div class="vh-100 gradient-custom">
-            <h1>Empleados</h1>
-            <table class="table table-striped">
-                <thead>
+        <h1>Empleados</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($empleados as $empleado)
                     <tr>
-                        <th scope="col">Nombre</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
+                        <td>{{ $empleado->nombre }}</td>
+                        <td><a href="{{ route('cardex', $empleado->id) }}">Cardex</a></td>
+                        <td><a href="{{ route('faltas', $empleado->id) }}">Reporte de Faltas</a></td>
+                        <td><a href="{{ route('crearIncidencia', $empleado->id) }}">Agregar justificante</a></td>
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach ($empleados as $empleado)
-                        <tr>
-                            <td>{{ $empleado->nombre }}</td>
-                            <td><a href="{{ route('cardex', $empleado->id) }}">Cardex</a></td>
-                            <td><a href="{{ route('faltas', $empleado->id) }}">Reporte de Faltas</a></td>
-                            <td><a href="{{ route('crearIncidencia', $empleado->id) }}">Agregar justificante</a></td>
-                        </tr>
-                        <br>
-                    @endforeach
-                </tbody>
-            </table>
-            <a href="{{ route('crearEmpleado') }}">Registrar nuevo empleado</a>
-        </div>
+                    <br>
+                @endforeach
+            </tbody>
+        </table>
+        <a href="{{ route('crearEmpleado') }}">Registrar nuevo empleado</a>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </body>
