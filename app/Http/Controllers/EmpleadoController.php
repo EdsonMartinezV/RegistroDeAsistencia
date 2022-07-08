@@ -139,7 +139,7 @@ class EmpleadoController extends Controller
                                         }
                                     }
                                     if(empty($faltas[$i]['hora_salida'])){
-                                        if($carbonHora->dayOfWeek == $horario->dia_salida){
+                                        if($carbonHora->dayOfWeek == $horario->pivot->dia_entrada){
                                             if($carbonTimeHoraEsteSi->gte($carbonInicio_checada_salida) and $carbonTimeHoraEsteSi->lte($carbonFin_checada_salida)){
                                                 $faltas[$i]['hora_salida'] = $carbonTimeHora->toTimeString();
                                             }
