@@ -22,8 +22,8 @@ Route::get('/', function () {
     return view('asistencia', compact('empleados'));
 })->name('formularioAsistencia');
 
-Route::get('reporteFaltas/{id}', function($id) {
-    return view('reporteFaltas', compact('id'));
+Route::get('reporteFaltas/{empleadoId}', function($empleadoId) {
+    return view('reporteFaltas', compact('empleadoId'));
 })->name('faltas');
 
 Route::post('/validar-asistencia', [RegistroController::class, 'validarAsistencia'])->name('validarAsistencia');

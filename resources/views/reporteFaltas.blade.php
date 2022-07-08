@@ -69,17 +69,19 @@
                             <td>Fecha</td>
                             <td>Hora Entrada</td>
                             <td>Hora Salida</td>
+                            <td>Justificado</td>
                           </tr>
                     </thead>
                     <tbody>
                         <tr>
-                        @dump($faltas)
                         @if (!empty($faltas))
-                           @foreach ($faltas as $falta)
-                                <td>{{ $falta->dia }}</td>
-                                <td>{{ $falta->fecha }}</td>
-                                <td>{{ $falta->hora_entrada }}</td>
-                                <td>{{ $falta->hora_salida }}</td>
+                            @foreach ($faltas as $falta)
+                                <tr>
+                                    <td>{{ $falta['dia'] }}</td>
+                                    <td>{{ $falta['fecha'] }}</td>
+                                    <td>{{ $falta['hora_entrada'] }}</td>
+                                    <td>{{ $falta['hora_salida'] }}</td>
+                                </tr>
                            @endforeach
                         @endif
                         </tr>
