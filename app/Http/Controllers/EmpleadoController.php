@@ -22,9 +22,9 @@ class EmpleadoController extends Controller
 {
     var $dias = [
         'Monday' => 'Lunes',
-        'Thursday' => 'Martes',
+        'Tuesday' => 'Martes',
         'Wednesday' => 'Miercoles',
-        'Tuesday' => 'Jueves',
+        'Thursday' => 'Jueves',
         'Friday' => 'Viernes',
         'Saturday' => 'Sabado',
         'Sunday' => 'Domingo'
@@ -120,42 +120,51 @@ class EmpleadoController extends Controller
             ];
             foreach($registros as $registro) {
                 $carbonHora = new Carbon($registro->hora);
-                foreach ($periodos as $periodo) {
-                    if($carbonHora->betweenIncluded($periodo->inicio_periodo_laboral, $periodo->fin_periodo_laboral)) {
-                        foreach ($periodo->horarios as $horario) {
-                            if($carbonHora->dayOfWeek == $horario->pivot->dia_entrada){
-                                $carbonInicio_checada_entrada = new Carbon($horario->hora_inicio_checada_entrada);
-                                $carbonFin_checada_entrada = new Carbon($horario->hora_fin_checada_entrada);
-                                $carbonInicio_checada_salida = new Carbon($horario->hora_inicio_checada_salida);
-                                $carbonFin_checada_salida = new Carbon($horario->hora_fin_checada_salida);
-                                $carbonTimeHora = new Carbon($carbonHora->toTimeString());
-                                //dd($carbonInicio_checada_entrada);
-                                if(empty($faltas[$i]['hora_entrada'])){
-                                    if($carbonTimeHora->gte($carbonInicio_checada_entrada) and $carbonTimeHora->lte($carbonFin_checada_entrada) ){
-                                        $faltas[$i]['hora_entrada'] = $carbonTimeHora->toTimeString();
+                if ($carbonHora->toDateString() == $fecha->toDateString()) {
+                    foreach ($periodos as $periodo) {
+                        if($carbonHora->betweenIncluded($periodo->inicio_periodo_laboral, $periodo->fin_periodo_laboral)) {
+                            foreach ($periodo->horarios as $horario) {
+                                if($carbonHora->dayOfWeek == $horario->pivot->dia_entrada){
+                                    $carbonInicio_checada_entrada = new Carbon($horario->hora_inicio_checada_entrada);
+                                    $carbonFin_checada_entrada = new Carbon($horario->hora_fin_checada_entrada);
+                                    $carbonInicio_checada_salida = new Carbon($horario->hora_inicio_checada_salida);
+                                    $carbonFin_checada_salida = new Carbon($horario->hora_fin_checada_salida);
+                                    $carbonTimeHora = new Carbon($carbonHora->toTimeString());
+                                    $carbonTimeHoraEsteSi = new Carbon($carbonTimeHora);
+
+                                    if(empty($faltas[$i]['hora_entrada'])){
+                                        // ($carbonTimeHoraEsteSi->gte($carbonInicio_checada_entrada) and $carbonTimeHoraEsteSi->lte($carbonFin_checada_entrada)) ? $faltas[$i]['hora_entrada'] =  $carbonTimeHora->toTimeString() : $faltas[$i]['hora_entrada'] =  'sin registro';
+                                        if($carbonTimeHoraEsteSi->gte($carbonInicio_checada_entrada) and $carbonTimeHoraEsteSi->lte($carbonFin_checada_entrada)){
+                                            $faltas[$i]['hora_entrada'] =  $carbonTimeHora->toTimeString();
+                                        }
                                     }
-                                }
-                                if(empty($faltas[$i]['hora_salida'])){
-                                    if($carbonHora->dayOfWeek == $horario->dia_salida){
-                                        if($carbonTimeHora->gte($carbonInicio_checada_salida) and $carbonTimeHora->lte($carbonFin_checada_salida) ){
-                                            $faltas[$i]['hora_salida'] = $carbonTimeHora->toTimeString();
+                                    if(empty($faltas[$i]['hora_salida'])){
+                                        if($carbonHora->dayOfWeek == $horario->dia_salida){
+                                            if($carbonTimeHoraEsteSi->gte($carbonInicio_checada_salida) and $carbonTimeHoraEsteSi->lte($carbonFin_checada_salida)){
+                                                $faltas[$i]['hora_salida'] = $carbonTimeHora->toTimeString();
+                                            }
                                         }
                                     }
                                 }
+                                /* if($carbonHora->dayOfWeek != $horario->pivot->dia_entrada){
+                                    if(empty($faltas[$i]['hora_salida'])){
+                                        $reporte_faltas[$i]['hora_salida'] = 'sin registro';
+                                    }
+                                    if(empty($reporte_faltas[$i]['hora_entrada'])){
+                                        $reporte_faltas[$i]['hora_entrada'] = 'sin registro';
+                                    }
+                                } */
                             }
-                            if($carbonHora->dayOfWeek != $horario->dia_entrada){
-                                if(empty($faltas[$i]['hora_salida'])){
-                                    $reporte_faltas[$i]['hora_salida'] = 'sin registro';
-                                }
-                                if(empty($reporte_faltas[$i]['hora_entrada'])){
-                                    $reporte_faltas[$i]['hora_entrada'] = 'sin registro';
-                                }
-                            }
-                            $i++;
                         }
                     }
+                    // dd('hora '.$carbonHora, 'fecha '.$fecha->toDateString());
+                }else if(empty($faltas[$i]['hora_entrada'])){
+                    $faltas[$i]['hora_entrada'] = 'sin registro';
+                }else if(empty($faltas[$i]['hora_salida'])){
+                    $faltas[$i]['hora_salida'] = 'sin registro';
                 }
             }
+            $i++;
         }
         dd($faltas);
     }
