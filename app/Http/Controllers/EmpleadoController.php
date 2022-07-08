@@ -158,13 +158,23 @@ class EmpleadoController extends Controller
                         }
                     }
                     // dd('hora '.$carbonHora, 'fecha '.$fecha->toDateString());
-                }else if(empty($faltas[$i]['hora_entrada'])){
+                }
+                }
+                if(empty($faltas[$i]['hora_entrada'])){
                     $faltas[$i]['hora_entrada'] = 'sin registro';
-                }else if(empty($faltas[$i]['hora_salida'])){
+                }
+                if(empty($faltas[$i]['hora_salida'])){
                     $faltas[$i]['hora_salida'] = 'sin registro';
                 }
-            }
-            $i++;
+                /* if (!$carbonHora->isSameDay($fecha)) {
+                    if(empty($faltas[$i]['hora_entrada'])){
+                    $faltas[$i]['dia1'] = $carbonHora->toDateTimeString();
+                    $faltas[$i]['dia2'] = $fecha->toDateTimeString();
+                    }if(empty($faltas[$i]['hora_salida'])){
+                    $faltas[$i]['hora_salida'] = 'sin registro';
+                    }
+                    } */
+                $i++;
         }
         dd($faltas);
     }
@@ -184,7 +194,7 @@ class EmpleadoController extends Controller
             ->orderBy('hora', 'asc')
             ->get();
         
-        //obtención de los dias de los periodos del empleado y catalogo horas de entrada/salida
+        //obtención de los dias de los periodos del empleado y catalogo horas de entrada
         $horarios = Empleado::find($empleadoId)
             ->join('periodos','empleados.id', '=', 'periodos.empleado_id')
             ->where('periodos.empleado_id','=',$empleadoId)
