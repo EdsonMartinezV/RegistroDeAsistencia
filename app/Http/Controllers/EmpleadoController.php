@@ -150,8 +150,14 @@ class EmpleadoController extends Controller
                     }
                 }
             }
+            if(Justificante::where('empleado_id', '=', $empleadoId)->where('fecha_inicio', '=', $fecha->toDateString())->exists()){
+                
+            }
             if(empty($faltas[$i]['hora_entrada']) || empty($faltas[$i]['hora_salida'])){
-                if(!Justificante::where('empleado_id', '=', $empleadoId)->where('fecha_inicio', '=', $fecha->toDateString())->exists()){
+                if(!Justificante::where('empleado_id', '=', $empleadoId)
+                        ->where('fecha_inicio', '=', $fecha->toDateString())
+                        ->where('catalogo_de_incidencias_id', '=', 1)
+                        ->exists()){
                     Justificante::create([
                         'fecha_inicio' => $fecha->toDateString(),
                         'horario' => 'Matutino',
@@ -169,7 +175,7 @@ class EmpleadoController extends Controller
             }
             $i++;
         }
-        dd($faltas);
+        return view ('reporteFaltas', compact('faltas', 'empleadoId'));
     }
 
     public function Faltas(Request $request, $empleadoId) {

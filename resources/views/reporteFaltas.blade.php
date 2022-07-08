@@ -17,7 +17,7 @@
 </head>
 <body>
     @csrf
-    <form action="{{ route('obtenerFaltas', $id) }}" method="GET">
+    <form action="{{ route('obtenerFaltas', $empleadoId) }}" method="GET">
        
     <h1>Reporte de faltas</h1>
     <div class="container py-5 h-100">
@@ -63,7 +63,6 @@
             </form> 
                 <br>
                 <table class="table table-striped">
-                    
                     <thead>
                         <tr class="table-warning">
                             <td>Día</td>
@@ -71,30 +70,23 @@
                             <td>Hora Entrada</td>
                             <td>Hora Salida</td>
                           </tr>
-                        
                     </thead>
                     <tbody>
-                        
-                        <tr> 
-                        @if (!empty($fechas))
-                           @foreach ($fechas as $fecha)
-                                <td>{{ \Carbon\Carbon::parse($fecha->from_date)->format('d/m/Y')}}</td>
-                                <td> </td>
-                                <td> </td>
-                                <td> </td>
+                        <tr>
+                        @dump($faltas)
+                        @if (!empty($faltas))
+                           @foreach ($faltas as $falta)
+                                <td>{{ $falta->dia }}</td>
+                                <td>{{ $falta->fecha }}</td>
+                                <td>{{ $falta->hora_entrada }}</td>
+                                <td>{{ $falta->hora_salida }}</td>
                            @endforeach
-
-
-                            
                         @endif
-                                
-                        </tr>     
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        
-    </div> 
-                 
+    </div>
 </body>
 </html>
